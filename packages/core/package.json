@@ -1,0 +1,34 @@
+{
+  "name": "@kode/core",
+  "version": "0.0.1",
+  "description": "Shared Core Engine for Kode",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "cosmiconfig": "^9.0.0",
+    "ejs": "^3.1.10",
+    "eslint": "9.26.0",
+    "execa": "^8.0.1",
+    "fs-extra": "^11.2.0",
+    "simple-git": "^3.25.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  }
+}

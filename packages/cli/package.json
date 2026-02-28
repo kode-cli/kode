@@ -1,0 +1,41 @@
+{
+  "name": "@kode/cli",
+  "version": "0.0.1",
+  "description": "Kode CLI — scaffold, commit, and quality gate",
+  "main": "dist/index.js",
+  "bin": {
+    "kode": "./bin/run"
+  },
+  "files": ["bin", "dist", "oclif.manifest.json"],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "@inquirer/prompts": "^4.3.0",
+    "@kode/core": "*",
+    "@oclif/core": "^3.26.0",
+    "execa": "^8.0.1",
+    "ink": "^4.4.1",
+    "react": "^18.3.0",
+    "simple-git": "^3.25.0"
+  },
+  "devDependencies": {
+    "@oclif/test": "^3.2.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "oclif": {
+    "bin": "kode",
+    "dirname": "kode",
+    "commands": "./dist/commands",
+    "plugins": []
+  }
+}

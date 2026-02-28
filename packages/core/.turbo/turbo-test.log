@@ -1,0 +1,23 @@
+
+
+> @kode/core@0.0.1 test
+> vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90m/Users/vanra/WebstormProjects/kode/packages/core[39m
+
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (5)[22m
+   [32m✓[39m Stage 1.1 — Core package smoke test[2m (5)[22m
+     [32m✓[39m exports CONFIG_VERSION
+     [32m✓[39m exports TEMPLATE_VERSION
+     [32m✓[39m exports GIT_VERSION
+     [32m✓[39m exports AI_VERSION
+     [32m✓[39m exports QUALITY_VERSION
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m5 passed[39m[22m[90m (5)[39m
+[2m   Start at [22m 09:31:54
+[2m   Duration [22m 315ms[2m (transform 17ms, setup 0ms, collect 17ms, tests 1ms, environment 0ms, prepare 34ms)[22m
+
+[?25h⠙[1G[0K
