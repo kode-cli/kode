@@ -1,31 +1,109 @@
 {
-  "name": "@kode/vscode-extension",
+  "name": "kode-vscode",
   "displayName": "Kode",
   "description": "AI-powered code generation, inline review, and Git automation",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "kode",
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": ["Other", "Machine Learning", "Linters"],
-  "activationEvents": [],
+  "keywords": ["ai", "code generation", "code review", "claude", "anthropic"],
+  "activationEvents": ["onStartupFinished"],
   "main": "./dist/extension.js",
   "scripts": {
     "build": "tsc",
+    "watch": "tsc --watch",
     "test": "vitest run",
     "lint": "eslint src --ext .ts",
     "clean": "rm -rf dist",
+    "package": "npx vsce package",
     "vscode:prepublish": "npm run build"
   },
   "contributes": {
     "commands": [
       {
-        "command": "kode.helloWorld",
-        "title": "Kode: Hello World"
+        "command": "kode.generateCode",
+        "title": "Kode: Generate Code",
+        "category": "Kode"
+      },
+      {
+        "command": "kode.explainCode",
+        "title": "Kode: Explain Code",
+        "category": "Kode"
+      },
+      {
+        "command": "kode.refactorCode",
+        "title": "Kode: Refactor Code",
+        "category": "Kode"
+      },
+      {
+        "command": "kode.reviewFile",
+        "title": "Kode: Review File",
+        "category": "Kode"
+      },
+      {
+        "command": "kode.openChat",
+        "title": "Kode: Open Chat",
+        "category": "Kode"
+      }
+    ],
+    "configuration": {
+      "title": "Kode",
+      "properties": {
+        "kode.reviewOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run AI code review automatically on file save"
+        },
+        "kode.reviewSeverityThreshold": {
+          "type": "string",
+          "enum": ["error", "warning", "info"],
+          "default": "warning",
+          "description": "Minimum severity level to show as an inline diagnostic"
+        },
+        "kode.aiModel": {
+          "type": "string",
+          "default": "claude-sonnet-4-6",
+          "description": "Claude model to use for all AI features"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "kode.generateCode",
+          "group": "kode@1",
+          "when": "editorTextFocus"
+        },
+        {
+          "command": "kode.explainCode",
+          "group": "kode@2",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "kode.refactorCode",
+          "group": "kode@3",
+          "when": "editorHasSelection"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "kode.generateCode",
+        "key": "ctrl+shift+g",
+        "mac": "cmd+shift+g",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "kode.openChat",
+        "key": "ctrl+shift+k",
+        "mac": "cmd+shift+k"
       }
     ]
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
     "@kode/core": "*"
   },
   "devDependencies": {

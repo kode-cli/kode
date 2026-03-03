@@ -19,11 +19,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install npm
-        uses: npm/action-setup@v2
-        with:
-          version: 8
-
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
@@ -31,13 +26,13 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --frozen-lockfile
+        run: npm install
 
       - name: Build all packages
-        run: npm build
+        run: npm run build
 
       - name: Run all tests
         run: npm test
 
       - name: Lint all packages
-        run: npm lint
+        run: npm run lint

@@ -1,28 +1,23 @@
 import { describe, it, expect } from 'vitest';
-import { CONFIG_VERSION } from './config';
-import { TEMPLATE_VERSION } from './templates';
-import { GIT_VERSION } from './git';
-import { AI_VERSION } from './ai';
-import { QUALITY_VERSION } from './quality';
 
-describe('Stage 1.1 — Core package smoke test', () => {
-    it('exports CONFIG_VERSION', () => {
-        expect(CONFIG_VERSION).toBe('0.0.1');
+describe('Stage 1.2 — Core package exports', () => {
+    it('exports defineConfig from config', async () => {
+        const { defineConfig } = await import('./config');
+        expect(defineConfig).toBeTypeOf('function');
     });
 
-    it('exports TEMPLATE_VERSION', () => {
-        expect(TEMPLATE_VERSION).toBe('0.0.1');
+    it('exports renderTemplate from templates', async () => {
+        const { renderTemplate } = await import('./templates');
+        expect(renderTemplate).toBeTypeOf('function');
     });
 
-    it('exports GIT_VERSION', () => {
-        expect(GIT_VERSION).toBe('0.0.1');
+    it('exports getAvailableTemplates from templates', async () => {
+        const { getAvailableTemplates } = await import('./templates');
+        expect(getAvailableTemplates).toBeTypeOf('function');
     });
 
-    it('exports AI_VERSION', () => {
-        expect(AI_VERSION).toBe('0.0.1');
-    });
-
-    it('exports QUALITY_VERSION', () => {
-        expect(QUALITY_VERSION).toBe('0.0.1');
+    it('exports KodeConfigSchema from config', async () => {
+        const { KodeConfigSchema } = await import('./config');
+        expect(KodeConfigSchema).toBeDefined();
     });
 });

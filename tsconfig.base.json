@@ -11,9 +11,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "outDir": "dist",
-    "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
-  },
-  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+  }
 }

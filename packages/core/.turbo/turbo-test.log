@@ -1,23 +1,65 @@
 
 
 > @kode/core@0.0.1 test
-> vitest run
+> vitest run.js
 
 [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
 
 [7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90m/Users/vanra/WebstormProjects/kode/packages/core[39m
 
- [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (5)[22m
-   [32m✓[39m Stage 1.1 — Core package smoke test[2m (5)[22m
-     [32m✓[39m exports CONFIG_VERSION
-     [32m✓[39m exports TEMPLATE_VERSION
-     [32m✓[39m exports GIT_VERSION
-     [32m✓[39m exports AI_VERSION
-     [32m✓[39m exports QUALITY_VERSION
+[?25l [90m·[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+[?25l[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+   [33m❯[39m Stage 1.2 — Core package exports[2m (4)[22m
+     [32m✓[39m exports defineConfig from config
+     [33m⠙[39m exports renderTemplate from templates
+     [90m·[39m exports getAvailableTemplates from templates
+     [90m·[39m exports KodeConfigSchema from config
+ [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [90m·[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [90m·[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+   [32m✓[39m renderTemplate[2m (6)[22m
+   [33m❯[39m node-express template[2m (2)[22m
+     [33m⠙[39m renders all expected files
+     [90m·[39m injects projectName into package.json
+   [90m·[39m react-app template[2m (2)[22m
+   [90m·[39m getAvailableTemplates[2m (2)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [33m❯[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+   [32m✓[39m KodeConfigSchema[2m (6)[22m
+   [32m✓[39m defineConfig[2m (2)[22m
+   [33m❯[39m loadConfig[2m (3)[22m
+     [33m⠙[39m throws a helpful error when no config file is found
+     [90m·[39m loads a real config file from fixtures
+     [90m·[39m throws a clear Zod error for invalid config
+ [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+   [32m✓[39m renderTemplate[2m (6)[22m
+   [33m❯[39m node-express template[2m (2)[22m
+     [32m✓[39m renders all expected files
+     [33m⠙[39m injects projectName into package.json
+   [90m·[39m react-app template[2m (2)[22m
+   [90m·[39m getAvailableTemplates[2m (2)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [33m❯[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+   [32m✓[39m KodeConfigSchema[2m (6)[22m
+   [32m✓[39m defineConfig[2m (2)[22m
+   [33m❯[39m loadConfig[2m (3)[22m
+     [33m⠹[39m throws a helpful error when no config file is found
+     [90m·[39m loads a real config file from fixtures
+     [90m·[39m throws a clear Zod error for invalid config
+ [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
 
-[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
-[2m      Tests [22m [1m[32m5 passed[39m[22m[90m (5)[39m
-[2m   Start at [22m 09:31:54
-[2m   Duration [22m 315ms[2m (transform 17ms, setup 0ms, collect 17ms, tests 1ms, environment 0ms, prepare 34ms)[22m
+[2m Test Files [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+[2m      Tests [22m [1m[32m27 passed[39m[22m[90m (27)[39m
+[2m   Start at [22m 10:34:40
+[2m   Duration [22m 371ms[2m (transform 62ms, setup 0ms, collect 130ms, tests 200ms, environment 0ms, prepare 126ms)[22m
 
-[?25h⠙[1G[0K
+[?25h[?25h⠙[1G[0K

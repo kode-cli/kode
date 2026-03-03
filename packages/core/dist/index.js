@@ -14,9 +14,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./config"), exports);
-__exportStar(require("./templates"), exports);
-__exportStar(require("./git"), exports);
-__exportStar(require("./ai"), exports);
-__exportStar(require("./quality"), exports);
+// Core Engine — public API
+__exportStar(require("./config/index.js"), exports);
+__exportStar(require("./templates/index.js"), exports);
+__exportStar(require("./git/index.js"), exports);
+__exportStar(require("./ai/index.js"), exports);
+__exportStar(require("./quality/index.js"), exports);
+__exportStar(require("./deploy/index.js"), exports);
 //# sourceMappingURL=index.js.map

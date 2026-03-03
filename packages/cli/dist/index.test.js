@@ -1,50 +1,14 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-const vitest_1 = require("vitest");
-(0, vitest_1.describe)('Stage 1.1 — CLI package smoke test', () => {
-    (0, vitest_1.it)('CLI package is importable', async () => {
+import { describe, it, expect } from 'vitest';
+describe('Stage 1.1 — CLI package smoke test', () => {
+    it('CLI package is importable', async () => {
         // Verify the CLI src entry point can be imported without errors
-        const cli = await Promise.resolve().then(() => __importStar(require('./index')));
-        (0, vitest_1.expect)(cli).toBeDefined();
+        const cli = await import('./index.js');
+        expect(cli).toBeDefined();
     });
-    (0, vitest_1.it)('core dependency is resolvable', async () => {
+    it('core dependency is resolvable', async () => {
         // Verify the workspace link to @kode/core resolves
-        const core = await Promise.resolve().then(() => __importStar(require('@kode/core')));
-        (0, vitest_1.expect)(core).toBeDefined();
-        (0, vitest_1.expect)(core.CONFIG_VERSION).toBe('0.0.1');
+        const core = await import('@kode/core');
+        expect(core).toBeDefined();
     });
 });
 //# sourceMappingURL=index.test.js.map

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "deploy-1772436145551-3awcv",
+    "version": "failed",
+    "imageTag": "failed",
+    "environment": "staging",
+    "timestamp": "2026-03-02T07:23:03.803Z",
+    "duration": 38257,
+    "status": "failure",
+    "gitSha": "",
+    "deployedBy": "vanra",
+    "notes": "Health check failed: Health check failed after 3 attempts\nContainer has been stopped."
+  }
+]

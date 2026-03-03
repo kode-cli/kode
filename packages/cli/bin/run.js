@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const oclif = require('@oclif/core');
+import 'dotenv/config';
+import { run, flush, Errors } from '@oclif/core';
 
-oclif.run(process.argv.slice(2), require('../package.json'))
-  .then(oclif.flush)
-  .catch(oclif.Errors.handle);
+await run(process.argv.slice(2), import.meta.url);
+await flush();

@@ -1,7 +1,2 @@
-import { Command } from '@oclif/core';
-export default class Hello extends Command {
-    static description: string;
-    static examples: string[];
-    run(): Promise<void>;
-}
+export { run } from '@oclif/core';
 //# sourceMappingURL=index.d.ts.map

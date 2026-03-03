@@ -1,10 +1,11 @@
 {
   "name": "@kode/cli",
   "version": "0.0.1",
+  "type": "module",
   "description": "Kode CLI — scaffold, commit, and quality gate",
   "main": "dist/index.js",
   "bin": {
-    "kode": "./bin/run"
+    "kode": "./bin/run.js"
   },
   "files": ["bin", "dist", "oclif.manifest.json"],
   "scripts": {

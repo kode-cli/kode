@@ -1,2 +1,4 @@
-export declare const AI_VERSION = "0.0.1";
+export declare function generateCommitMessage(diff: string): Promise<string>;
+export declare function generatePRDescription(commits: string[]): Promise<string>;
+export declare function isAIAvailable(): boolean;
 //# sourceMappingURL=index.d.ts.map

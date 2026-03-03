@@ -1,7 +1,7 @@
 
 
 > @kode/cli@0.0.1 test
-> vitest run
+> vitest run.js
 
 [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
 
@@ -11,14 +11,18 @@
    [90m·[39m Stage 1.1 — CLI package smoke test[2m (2)[22m
      [90m·[39m CLI package is importable
      [90m·[39m core dependency is resolvable
-[?25l[?25l[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (2)[22m
+[?25l[?25l[?25l[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/[22mindex[2m.test.ts[22m[2m (2)[22m
+   [33m❯[39m Stage 1.1 — CLI package smoke test[2m (2)[22m
+     [32m✓[39m CLI package is importable
+     [33m⠙[39m core dependency is resolvable
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (2)[22m
    [32m✓[39m Stage 1.1 — CLI package smoke test[2m (2)[22m
      [32m✓[39m CLI package is importable
      [32m✓[39m core dependency is resolvable
 
 [2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
 [2m      Tests [22m [1m[32m2 passed[39m[22m[90m (2)[39m
-[2m   Start at [22m 09:31:54
-[2m   Duration [22m 363ms[2m (transform 24ms, setup 0ms, collect 11ms, tests 73ms, environment 0ms, prepare 70ms)[22m
+[2m   Start at [22m 10:34:41
+[2m   Duration [22m 190ms[2m (transform 22ms, setup 0ms, collect 9ms, tests 86ms, environment 0ms, prepare 22ms)[22m
 
 [?25h[?25h⠙[1G[0K
