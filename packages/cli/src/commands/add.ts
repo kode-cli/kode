@@ -2,9 +2,8 @@ import { Command, Args, Flags } from '@oclif/core';
 import { isAIAvailable } from '@kode/core';
 import Anthropic from '@anthropic-ai/sdk';
 import { input } from '@inquirer/prompts';
-import { render } from 'ink';
-import React from 'react';
-import { Spinner } from '../ui/Spinner.js';
+import { runWithSpinner } from '../utils/spinner.js';
+import { toErrorMessage } from '../utils/errors.js';
 import fs from 'fs-extra';
 import path from 'path';
 
@@ -74,7 +73,7 @@ export default class Add extends Command {
         let suggestedFilename = '';
 
         try {
-            await this.runWithSpinner(`Generating ${feature}…`, async () => {
+            await runWithSpinner(`Generating ${feature}…`, async () => {
                 const client = new Anthropic();
 
                 // First, get filename suggestion
@@ -116,7 +115,7 @@ ${existingFiles ? `Existing files in project: ${existingFiles}` : ''}`,
                 if (codeContent.type === 'text') generatedCode = codeContent.text.trim();
             });
         } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
+            const msg = toErrorMessage(err);
             if (msg.includes('credit balance')) {
                 this.log('\n❌  Credit balance too low.');
                 this.log('   Add credits at: https://console.anthropic.com\n');
@@ -147,19 +146,6 @@ ${existingFiles ? `Existing files in project: ${existingFiles}` : ''}`,
         this.log(`\n💡 Review the file and run ${this.dim('kode commit')} when ready.\n`);
     }
 
-    private async runWithSpinner(label: string, fn: () => Promise<void>): Promise<void> {
-        const { unmount, rerender } = render(React.createElement(Spinner, { label }));
-        try {
-            await fn();
-            rerender(React.createElement(Spinner, { label, done: true }));
-        } catch (err) {
-            rerender(React.createElement(Spinner, { label, failed: true }));
-            unmount();
-            throw err;
-        }
-        await new Promise((r) => setTimeout(r, 150));
-        unmount();
-    }
 
     private dim(text: string): string { return `\x1b[2m${text}\x1b[0m`; }
 }

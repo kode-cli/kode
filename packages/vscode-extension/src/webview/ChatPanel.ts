@@ -11,7 +11,6 @@ export class ChatPanel {
     private static readonly viewType = 'kodeChat';
 
     private readonly _panel: vscode.WebviewPanel;
-    private readonly _extensionUri: vscode.Uri;
     private _disposables: vscode.Disposable[] = [];
     private _history: Message[] = [];
     private readonly _client: Anthropic;
@@ -39,9 +38,8 @@ export class ChatPanel {
         ChatPanel.currentPanel = new ChatPanel(panel, extensionUri);
     }
 
-    private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
+    private constructor(panel: vscode.WebviewPanel, _extensionUri: vscode.Uri) {
         this._panel = panel;
-        this._extensionUri = extensionUri;
         this._client = new Anthropic();
 
         this._panel.webview.html = this._getHtml();

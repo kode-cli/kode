@@ -11,9 +11,9 @@ import {
 } from '@kode/core';
 import type { QualityCheck } from '@kode/core';
 import { confirm, input } from '@inquirer/prompts';
-import { render } from 'ink';
-import React from 'react';
-import { Spinner } from '../ui/Spinner.js';
+import { runWithSpinner } from '../utils/spinner.js';
+import { toErrorMessage } from '../utils/errors.js';
+import { execa } from 'execa';
 
 export default class Commit extends Command {
     static description = 'Stage all changes, run quality checks, generate an AI commit message, and commit';
@@ -56,8 +56,7 @@ export default class Commit extends Command {
 
         // ── 2. Stage all changes unless --no-add ────────────────────────────
         if (!flags['no-add']) {
-            await this.runWithSpinner('Staging all changes…', async () => {
-                const { execa } = await import('execa');
+            await runWithSpinner('Staging all changes…', async () => {
                 await execa('git', ['add', '.'], { cwd });
             });
         }
@@ -139,11 +138,11 @@ export default class Commit extends Command {
         let message = '';
 
         try {
-            await this.runWithSpinner('Generating commit message…', async () => {
+            await runWithSpinner('Generating commit message…', async () => {
                 message = await generateCommitMessage(diff);
             });
         } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
+            const msg = toErrorMessage(err);
             this.log(`\n❌  ${msg.split('\n')[0]}\n`);
             process.exitCode = 1;
             return;
@@ -176,34 +175,15 @@ export default class Commit extends Command {
 
     private async pushToRemote(): Promise<void> {
         try {
-            await this.runWithSpinner('Pushing to remote…', async () => {
-                const { execa } = await import('execa');
+            await runWithSpinner('Pushing to remote…', async () => {
                 await execa('git', ['push'], { cwd: process.cwd() });
             });
             this.log('🚀 Pushed to remote.\n');
         } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
+            const msg = toErrorMessage(err);
             this.log(`\n❌  Push failed: ${msg.split('\n')[0]}`);
             this.log('   Run `git push` manually to retry.\n');
             process.exitCode = 1;
         }
-    }
-
-    private async runWithSpinner(label: string, fn: () => Promise<void>): Promise<void> {
-        const { unmount, rerender } = render(
-            React.createElement(Spinner, { label })
-        );
-
-        try {
-            await fn();
-            rerender(React.createElement(Spinner, { label, done: true }));
-        } catch (err) {
-            rerender(React.createElement(Spinner, { label, failed: true }));
-            unmount();
-            throw err;
-        }
-
-        await new Promise((r) => setTimeout(r, 150));
-        unmount();
     }
 }

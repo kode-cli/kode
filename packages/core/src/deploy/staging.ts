@@ -3,7 +3,6 @@ import { resolveContainerPort } from './config.js';
 import { runHealthCheck } from './health.js';
 import type { BuildResult } from './docker.js';
 
-
 export async function deployStaging(
     config: DeployConfig,
     build: BuildResult,
@@ -25,11 +24,9 @@ export async function deployStaging(
         log(`   Would run: docker run -d --name ${containerName} -p ${staging.port}:${containerPort} ${build.imageTag}`);
         return;
     }
-
-    const { execa } = await import('execa');
-
     // ── Stop and remove existing container ───────────────────────────────────
     log('\n   Stopping existing container (if any)…');
+    const { execa } = await import('execa');
     await execa('docker', ['stop', containerName], { reject: false });
     await execa('docker', ['rm', containerName], { reject: false });
 

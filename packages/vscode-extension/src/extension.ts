@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
-import { generateCodeStreaming, reviewCode, fixCode } from './ai/aiClient';
+import { generateCodeStreaming, fixCode } from './ai/aiClient';
 import { GitClient } from '@kode/core';
-import { MyToolCodeActionProvider, diagnosticCollection, analyzeDocument } from './providers/codeActionProvider';
+import { KodeCodeActionProvider, diagnosticCollection, analyzeDocument } from './providers/codeActionProvider';
 import { ChatPanel } from './webview/ChatPanel';
 
 let statusBarItem: vscode.StatusBarItem;
@@ -207,7 +207,7 @@ export function activate(context: vscode.ExtensionContext): void {
             { scheme: 'file', language: 'javascript' },
             { scheme: 'file', language: 'javascriptreact' },
         ],
-        new MyToolCodeActionProvider(),
+        new KodeCodeActionProvider(),
         { providedCodeActionKinds: [vscode.CodeActionKind.QuickFix, vscode.CodeActionKind.Empty] }
     );
 

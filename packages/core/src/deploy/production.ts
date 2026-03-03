@@ -199,7 +199,7 @@ async function deployToServer(
 async function runSSHCommand(
     server: ServerConfig,
     command: string,
-    log: (msg: string) => void
+    _log: (msg: string) => void
 ): Promise<string> {
     const { execa } = await import('execa');
 
@@ -232,10 +232,10 @@ async function transferImageViaSSH(
     imageTag: string,
     log: (msg: string) => void
 ): Promise<void> {
-    const { execa } = await import('execa');
 
     const sshTarget = `${server.user}@${server.host}`;
     const sshKeyArgs = server.keyPath ? ['-i', server.keyPath] : [];
+    const { execa } = await import('execa');
 
     // Save image to tar, pipe directly to server via SSH, load it there
     log(`   docker save ${imageTag} | ssh ${sshTarget} docker load`);

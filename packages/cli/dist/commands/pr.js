@@ -1,8 +1,7 @@
 import { Command, Flags } from '@oclif/core';
 import { GitClient, generatePRDescription, isAIAvailable } from '@kode/core';
-import { render } from 'ink';
-import React from 'react';
-import { Spinner } from '../ui/Spinner.js';
+import { runWithSpinner } from '../utils/spinner.js';
+import { toErrorMessage } from '../utils/errors.js';
 class PR extends Command {
     async run() {
         const { flags } = await this.parse(PR);
@@ -28,12 +27,12 @@ class PR extends Command {
         this.log(`\nGenerating PR description from ${commits.length} commit(s)…`);
         let description = '';
         try {
-            await this.runWithSpinner('Generating PR description…', async () => {
+            await runWithSpinner('Generating PR description…', async () => {
                 description = await generatePRDescription(commits);
             });
         }
         catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
+            const msg = toErrorMessage(err);
             this.log(`\n❌  ${msg.split('\n')[0]}\n`);
             process.exitCode = 1;
             return;
@@ -42,20 +41,6 @@ class PR extends Command {
         this.log(description);
         this.log('─'.repeat(60) + '\n');
         this.log('💡 Tip: Copy the above into your PR description on GitHub.\n');
-    }
-    async runWithSpinner(label, fn) {
-        const { unmount, rerender } = render(React.createElement(Spinner, { label }));
-        try {
-            await fn();
-            rerender(React.createElement(Spinner, { label, done: true }));
-        }
-        catch (err) {
-            rerender(React.createElement(Spinner, { label, failed: true }));
-            unmount();
-            throw err;
-        }
-        await new Promise((r) => setTimeout(r, 150));
-        unmount();
     }
 }
 PR.description = 'Generate an AI pull request description from recent commits';

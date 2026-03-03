@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MyToolCodeActionProvider = exports.diagnosticCollection = void 0;
+exports.KodeCodeActionProvider = exports.diagnosticCollection = void 0;
 exports.analyzeDocument = analyzeDocument;
 const vscode = __importStar(require("vscode"));
 const aiClient_1 = require("../ai/aiClient");
@@ -62,7 +62,7 @@ async function analyzeDocument(document) {
     });
     exports.diagnosticCollection.set(document.uri, diagnostics);
 }
-class MyToolCodeActionProvider {
+class KodeCodeActionProvider {
     provideCodeActions(document, range) {
         // Only show actions when there are diagnostics on this range
         const diagnostics = vscode.languages
@@ -88,5 +88,5 @@ class MyToolCodeActionProvider {
         return [fix, explain];
     }
 }
-exports.MyToolCodeActionProvider = MyToolCodeActionProvider;
+exports.KodeCodeActionProvider = KodeCodeActionProvider;
 //# sourceMappingURL=codeActionProvider.js.map

@@ -4,12 +4,13 @@ import {
     runLint,
     runTests,
     runSecurityScan,
-    isAIAvailable,
 } from '@kode/core';
-import type { CheckResult, QualityCheck } from '@kode/core';
+import type { CheckResult } from '@kode/core';
 import { render } from 'ink';
 import React from 'react';
 import { Spinner } from '../ui/Spinner.js';
+import { toErrorMessage } from '../utils/errors.js';
+import { execa } from 'execa';
 
 export default class Check extends Command {
     static description = 'Run the quality gate (lint, tests, security)';
@@ -63,11 +64,11 @@ export default class Check extends Command {
 
         // Custom checks from config
         if (config?.quality.customChecks?.length && !flags.only) {
-            for (const custom of config.quality.customChecks) {
+            // config is guaranteed non-null here by the optional-chain guard above
+            for (const custom of config!.quality.customChecks) {
                 checks.push({
                     label: custom.name,
                     fn: async () => {
-                        const { execa } = await import('execa');
                         const start = Date.now();
                         try {
                             const { stdout } = await execa(custom.command, { cwd, shell: true });
@@ -117,7 +118,7 @@ export default class Check extends Command {
                 result = {
                     name: check.label,
                     passed: false,
-                    output: err instanceof Error ? err.message : String(err),
+                    output: toErrorMessage(err),
                     duration: 0,
                 };
                 rerender(React.createElement(Spinner, { label: check.label, failed: true }));

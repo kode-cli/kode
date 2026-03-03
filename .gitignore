@@ -3,9 +3,9 @@ dist/
 .env
 .env.local
 *.log
-coverage/
+coverage
 .DS_Store
 # Add to .gitignore
-.turbo/
-.idea/
+.turbo
+.idea
 *.vsix

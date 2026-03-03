@@ -13,6 +13,7 @@
   "main": "./dist/extension.js",
   "scripts": {
     "build": "tsc",
+    "typecheck": "tsc --noEmit",
     "watch": "tsc --watch",
     "test": "vitest run",
     "lint": "eslint src --ext .ts",

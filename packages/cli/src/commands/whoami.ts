@@ -1,6 +1,7 @@
 import { Command } from '@oclif/core';
 import { GitClient } from '@kode/core';
 import { simpleGit } from 'simple-git';
+import { toHttpsUrl } from '../utils/git.js';
 
 export default class Whoami extends Command {
     static description = 'Show current git user, remote URL, and branch info';
@@ -43,7 +44,7 @@ export default class Whoami extends Command {
 
         if (origin) {
             const fetchUrl = origin.refs.fetch ?? origin.refs.push ?? '';
-            const repoUrl = this.toHttpsUrl(fetchUrl);
+            const repoUrl = toHttpsUrl(fetchUrl);
             this.log(`     Remote: ${fetchUrl.trim()}`);
             if (repoUrl !== fetchUrl.trim()) {
                 this.log(`     URL:    ${repoUrl}`);
@@ -56,13 +57,6 @@ export default class Whoami extends Command {
         this.log('');
     }
 
-    private toHttpsUrl(url: string): string {
-        // Convert git@github.com:user/repo.git → https://github.com/user/repo
-        return url
-            .trim()
-            .replace(/^git@([^:]+):/, 'https://$1/')
-            .replace(/\.git$/, '');
-    }
 
     private bold(text: string): string { return `\x1b[1m${text}\x1b[0m`; }
     private dim(text: string): string { return `\x1b[2m${text}\x1b[0m`; }

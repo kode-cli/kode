@@ -17,38 +17,35 @@ export async function runPreflight(
     log('\n🔍 Running pre-deploy checks…\n');
 
     // ── 1. Docker running ─────────────────────────────────────────────────────
-    process.stdout.write('   Docker Desktop running… ');
     const dockerOk = await checkDockerRunning();
     if (dockerOk) {
-        console.log('✅');
+        log('   Docker Desktop running… ✅');
     } else {
-        console.log('❌');
+        log('   Docker Desktop running… ❌');
         failures.push('Docker Desktop is not running. Open Docker Desktop and try again.');
     }
 
     // ── 2. Required env vars ──────────────────────────────────────────────────
     const required = config.envVars?.required ?? [];
     if (required.length > 0) {
-        process.stdout.write('   Required env vars… ');
         const missing = required.filter((k) => !process.env[k]);
         if (missing.length === 0) {
-            console.log('✅');
+            log('   Required env vars… ✅');
         } else {
-            console.log('❌');
+            log('   Required env vars… ❌');
             failures.push(`Missing required env vars: ${missing.join(', ')}`);
         }
     }
 
     // ── 3. Dockerfile exists ──────────────────────────────────────────────────
-    process.stdout.write('   Dockerfile exists… ');
     const fs = await import('fs-extra');
     const path = await import('path');
     const dockerfilePath = path.join(cwd, config.project.dockerfile);
     const dockerfileExists = await fs.pathExists(dockerfilePath);
     if (dockerfileExists) {
-        console.log('✅');
+        log('   Dockerfile exists… ✅');
     } else {
-        console.log('❌');
+        log('   Dockerfile exists… ❌');
         failures.push(`Dockerfile not found at: ${config.project.dockerfile}`);
     }
 
@@ -57,12 +54,11 @@ export async function runPreflight(
         const servers = config.environments.production.servers;
         for (const server of servers) {
             const label = server.label ?? server.host;
-            process.stdout.write(`   SSH to ${label}… `);
             const sshOk = await testSSH(server);
             if (sshOk) {
-                console.log('✅');
+                log(`   SSH to ${label}… ✅`);
             } else {
-                console.log('❌');
+                log(`   SSH to ${label}… ❌`);
                 failures.push(
                     `Cannot SSH to ${label}. Run: ssh ${server.user}@${server.host} to debug.`
                 );
@@ -75,12 +71,11 @@ export async function runPreflight(
     if (preBuildHooks && preBuildHooks.length > 0) {
         log('\n   Running pre-build hooks…');
         for (const cmd of preBuildHooks) {
-            process.stdout.write(`   $ ${cmd}… `);
             const ok = await runCommand(cmd, cwd);
             if (ok) {
-                console.log('✅');
+                log(`   $ ${cmd}… ✅`);
             } else {
-                console.log('❌');
+                log(`   $ ${cmd}… ❌`);
                 failures.push(`Pre-build hook failed: ${cmd}`);
                 break; // stop on first failure
             }
@@ -88,16 +83,15 @@ export async function runPreflight(
     }
 
     // ── 6. Secrets scan ───────────────────────────────────────────────────────
-    process.stdout.write('   Scanning for exposed secrets… ');
     const secretsOk = await scanForSecrets(cwd);
     if (secretsOk) {
-        console.log('✅');
+        log('   Scanning for exposed secrets… ✅');
     } else {
-        console.log('⚠️  (warning — potential secrets found in source files)');
+        log('   Scanning for exposed secrets… ⚠️  (warning — potential secrets found in source files)');
         // Warning only, not a blocker
     }
 
-    console.log('');
+    log('');
 
     return {
         passed: failures.length === 0,
@@ -146,10 +140,10 @@ async function scanForSecrets(cwd: string): Promise<boolean> {
 
     try {
         const { execa } = await import('execa');
-        const { stdout } = await execa('git', ['diff', '--cached', '--name-only'], { cwd });
-        const files = stdout.trim().split('\n').filter(Boolean);
         const fs = await import('fs-extra');
         const path = await import('path');
+        const { stdout } = await execa('git', ['diff', '--cached', '--name-only'], { cwd });
+        const files = stdout.trim().split('\n').filter(Boolean);
 
         for (const file of files) {
             const fullPath = path.join(cwd, file);

@@ -9,6 +9,5 @@ export default class Commit extends Command {
     };
     run(): Promise<void>;
     private pushToRemote;
-    private runWithSpinner;
 }
 //# sourceMappingURL=commit.d.ts.map

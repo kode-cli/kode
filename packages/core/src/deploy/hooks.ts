@@ -1,4 +1,3 @@
-
 export interface HookContext {
     imageTag: string;
     version: string;
@@ -25,7 +24,7 @@ export async function runHooks(
         log(`   $ ${resolved}`);
 
         try {
-            const { execa } = await import('execa');  // ← dynamic import here
+            const { execa } = await import('execa');
             const { stdout } = await execa(resolved, {
                 cwd: context.cwd,
                 shell: true,
@@ -51,9 +50,9 @@ export async function runHooks(
 
 function injectVariables(cmd: string, ctx: HookContext): string {
     return cmd
-        .replace(/\$\{IMAGE_TAG\}/g, ctx.imageTag)
-        .replace(/\$\{VERSION\}/g, ctx.version)
-        .replace(/\$\{GIT_SHA\}/g, ctx.gitSha)
-        .replace(/\$\{ENVIRONMENT\}/g, ctx.environment)
-        .replace(/\$\{SERVER_LABEL\}/g, ctx.serverLabel ?? '');
+        .replace(/\$\{IMAGE_TAG}/g, ctx.imageTag)
+        .replace(/\$\{VERSION}/g, ctx.version)
+        .replace(/\$\{GIT_SHA}/g, ctx.gitSha)
+        .replace(/\$\{ENVIRONMENT}/g, ctx.environment)
+        .replace(/\$\{SERVER_LABEL}/g, ctx.serverLabel ?? '');
 }

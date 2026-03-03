@@ -13,8 +13,6 @@ export async function buildImage(
     log: (msg: string) => void,
     cwd: string
 ): Promise<BuildResult> {
-    const { execa } = await import('execa');
-
     // Resolve version
     const version = await resolveVersion(config, cwd);
 
@@ -50,6 +48,7 @@ export async function buildImage(
     ];
 
     try {
+        const { execa } = await import('execa');
         const { stdout } = await execa('docker', args, { cwd, all: true });
         if (stdout?.trim()) {
             log(`   ${stdout.trim().split('\n').slice(-3).join('\n   ')}`);
@@ -68,11 +67,10 @@ export async function pushImage(
     log: (msg: string) => void,
     cwd: string
 ): Promise<void> {
-    const { execa } = await import('execa');
-
     log(`\n   Pushing image to registry: ${imageTag}`);
 
     try {
+        const { execa } = await import('execa');
         await execa('docker', ['push', imageTag], { cwd });
         log(`   ✅ Image pushed`);
     } catch (err: unknown) {

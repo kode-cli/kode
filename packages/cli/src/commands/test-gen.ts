@@ -1,9 +1,8 @@
 import { Command, Args, Flags } from '@oclif/core';
 import { isAIAvailable } from '@kode/core';
 import Anthropic from '@anthropic-ai/sdk';
-import { render } from 'ink';
-import React from 'react';
-import { Spinner } from '../ui/Spinner.js';
+import { runWithSpinner } from '../utils/spinner.js';
+import { toErrorMessage } from '../utils/errors.js';
 import fs from 'fs-extra';
 import path from 'path';
 
@@ -65,7 +64,7 @@ export default class Test extends Command {
         let testCode = '';
 
         try {
-            await this.runWithSpinner(`Generating tests for ${args.file}…`, async () => {
+            await runWithSpinner(`Generating tests for ${args.file}…`, async () => {
                 const client = new Anthropic();
                 const response = await client.messages.create({
                     model: 'claude-sonnet-4-6',
@@ -89,7 +88,7 @@ Rules:
                 if (content.type === 'text') testCode = content.text.trim();
             });
         } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
+            const msg = toErrorMessage(err);
             if (msg.includes('credit balance')) {
                 this.log('\n❌  Credit balance too low.');
                 this.log('   Add credits at: https://console.anthropic.com\n');
@@ -114,19 +113,6 @@ Rules:
         }
     }
 
-    private async runWithSpinner(label: string, fn: () => Promise<void>): Promise<void> {
-        const { unmount, rerender } = render(React.createElement(Spinner, { label }));
-        try {
-            await fn();
-            rerender(React.createElement(Spinner, { label, done: true }));
-        } catch (err) {
-            rerender(React.createElement(Spinner, { label, failed: true }));
-            unmount();
-            throw err;
-        }
-        await new Promise((r) => setTimeout(r, 150));
-        unmount();
-    }
 
     private dim(text: string): string { return `\x1b[2m${text}\x1b[0m`; }
 }

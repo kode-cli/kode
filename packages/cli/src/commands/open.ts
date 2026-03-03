@@ -2,6 +2,7 @@ import { Command, Flags } from '@oclif/core';
 import { GitClient } from '@kode/core';
 import { simpleGit } from 'simple-git';
 import { execa } from 'execa';
+import { toHttpsUrl } from '../utils/git.js';
 
 export default class Open extends Command {
     static description = 'Open the GitHub repository in your browser';
@@ -51,10 +52,7 @@ export default class Open extends Command {
         }
 
         const fetchUrl = origin.refs.fetch ?? origin.refs.push ?? '';
-        let repoUrl = fetchUrl
-            .trim()
-            .replace(/^git@([^:]+):/, 'https://$1/')
-            .replace(/\.git$/, '');
+        let repoUrl = toHttpsUrl(fetchUrl);
 
         // Append sub-page if flag provided
         if (flags.prs) repoUrl += '/pulls';

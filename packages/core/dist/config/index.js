@@ -56,33 +56,35 @@ function defineConfig(config) {
 }
 // ── Loader ────────────────────────────────────────────────────────────────────
 async function loadConfig(cwd = process.cwd()) {
-    // Try plain JS/JSON cosmiconfig first (works without tsx)
-    const explorerSync = (0, cosmiconfig_1.cosmiconfig)('kode', {
+    const explorer = (0, cosmiconfig_1.cosmiconfig)('kode', {
         searchPlaces: [
+            'kode.config.ts',
             'kode.config.js',
             'kode.config.cjs',
             '.koderc',
             '.koderc.json',
             'package.json',
         ],
-    });
-    // Also try TypeScript with loader
-    const explorerTs = (0, cosmiconfig_1.cosmiconfig)('kode', {
-        searchPlaces: ['kode.config.ts'],
         loaders: {
             '.ts': (0, cosmiconfig_typescript_loader_1.TypeScriptLoader)(),
         },
     });
     let result = null;
-    // Try TS first, fall back to JS
     try {
-        result = await explorerTs.search(cwd);
+        result = await explorer.search(cwd);
     }
     catch {
-        // tsx not available or other error — try JS config
-    }
-    if (!result || result.isEmpty) {
-        result = await explorerSync.search(cwd);
+        // TS loader not available — retry without it (JS/JSON only)
+        const fallback = (0, cosmiconfig_1.cosmiconfig)('kode', {
+            searchPlaces: [
+                'kode.config.js',
+                'kode.config.cjs',
+                '.koderc',
+                '.koderc.json',
+                'package.json',
+            ],
+        });
+        result = await fallback.search(cwd);
     }
     if (!result || result.isEmpty) {
         throw new Error(`No kode.config.ts found in ${cwd}.\n` +

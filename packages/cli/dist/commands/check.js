@@ -3,6 +3,8 @@ import { loadConfig, runLint, runTests, runSecurityScan, } from '@kode/core';
 import { render } from 'ink';
 import React from 'react';
 import { Spinner } from '../ui/Spinner.js';
+import { toErrorMessage } from '../utils/errors.js';
+import { execa } from 'execa';
 class Check extends Command {
     async run() {
         const { flags } = await this.parse(Check);
@@ -32,11 +34,11 @@ class Check extends Command {
         }
         // Custom checks from config
         if (config?.quality.customChecks?.length && !flags.only) {
+            // config is guaranteed non-null here by the optional-chain guard above
             for (const custom of config.quality.customChecks) {
                 checks.push({
                     label: custom.name,
                     fn: async () => {
-                        const { execa } = await import('execa');
                         const start = Date.now();
                         try {
                             const { stdout } = await execa(custom.command, { cwd, shell: true });
@@ -81,7 +83,7 @@ class Check extends Command {
                 result = {
                     name: check.label,
                     passed: false,
-                    output: err instanceof Error ? err.message : String(err),
+                    output: toErrorMessage(err),
                     duration: 0,
                 };
                 rerender(React.createElement(Spinner, { label: check.label, failed: true }));

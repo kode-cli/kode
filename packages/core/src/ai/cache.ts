@@ -18,7 +18,7 @@ class LRUCache {
             this.cache.delete(key);
             return null;
         }
-        // Move to end (most recently used)
+        // Move to end (most recently used) — only on valid, non-expired entries
         this.cache.delete(key);
         this.cache.set(key, entry);
         return entry.value;
@@ -34,6 +34,10 @@ class LRUCache {
             value,
             expiresAt: Date.now() + CACHE_TTL_MS,
         });
+    }
+
+    get size(): number {
+        return this.cache.size;
     }
 
     clear(): void {

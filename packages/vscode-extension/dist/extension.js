@@ -170,7 +170,7 @@ function activate(context) {
         { scheme: 'file', language: 'typescriptreact' },
         { scheme: 'file', language: 'javascript' },
         { scheme: 'file', language: 'javascriptreact' },
-    ], new codeActionProvider_1.MyToolCodeActionProvider(), { providedCodeActionKinds: [vscode.CodeActionKind.QuickFix, vscode.CodeActionKind.Empty] });
+    ], new codeActionProvider_1.KodeCodeActionProvider(), { providedCodeActionKinds: [vscode.CodeActionKind.QuickFix, vscode.CodeActionKind.Empty] });
     // ── Auto-review on save ───────────────────────────────────────────────────
     let reviewTimeout;
     const onSave = vscode.workspace.onDidSaveTextDocument(async (document) => {

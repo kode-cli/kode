@@ -1,9 +1,8 @@
 import { Command, Flags } from '@oclif/core';
 import { loadDeployConfig, DeployHistory, sendNotification } from '@kode/core';
 import { select } from '@inquirer/prompts';
-import { render } from 'ink';
-import React from 'react';
-import { Spinner } from '../ui/Spinner.js';
+import { runWithSpinner } from '../utils/spinner.js';
+import { toErrorMessage } from '../utils/errors.js';
 import { execa } from 'execa';
 
 export default class Rollback extends Command {
@@ -113,7 +112,7 @@ export default class Rollback extends Command {
             this.log(`\n✅ Rolled back successfully!\n`);
 
         } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
+            const msg = toErrorMessage(err);
             this.log(`\n❌ Rollback failed: ${msg}\n`);
             process.exitCode = 1;
         }
@@ -127,7 +126,7 @@ export default class Rollback extends Command {
         const containerName = config.environments.staging?.containerName ?? `${appName}-staging`;
         const port = config.environments.staging?.port ?? 3000;
 
-        await this.runWithSpinner('Rolling back staging…', async () => {
+        await runWithSpinner('Rolling back staging…', async () => {
             await execa('docker', ['stop', containerName], { reject: false });
             await execa('docker', ['rm', containerName], { reject: false });
             await execa('docker', [
@@ -153,7 +152,7 @@ export default class Rollback extends Command {
 
         for (const server of servers) {
             const label = server.label ?? server.host;
-            await this.runWithSpinner(`Rolling back ${label}…`, async () => {
+            await runWithSpinner(`Rolling back ${label}…`, async () => {
                 const sshArgs = [
                     ...(server.keyPath ? ['-i', server.keyPath] : []),
                     '-o', 'StrictHostKeyChecking=no',
@@ -168,19 +167,5 @@ export default class Rollback extends Command {
                 ]);
             });
         }
-    }
-
-    private async runWithSpinner(label: string, fn: () => Promise<void>): Promise<void> {
-        const { unmount, rerender } = render(React.createElement(Spinner, { label }));
-        try {
-            await fn();
-            rerender(React.createElement(Spinner, { label, done: true }));
-        } catch (err) {
-            rerender(React.createElement(Spinner, { label, failed: true }));
-            unmount();
-            throw err;
-        }
-        await new Promise((r) => setTimeout(r, 150));
-        unmount();
     }
 }

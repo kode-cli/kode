@@ -16,8 +16,8 @@ interface SemgrepReport {
 
 export async function runSecurityScan(cwd: string): Promise<CheckResult> {
     const start = Date.now();
-
     const { execa } = await import('execa');
+
 
     // Check if semgrep is installed
     try {

@@ -54,11 +54,10 @@ class ChatPanel {
         });
         ChatPanel.currentPanel = new ChatPanel(panel, extensionUri);
     }
-    constructor(panel, extensionUri) {
+    constructor(panel, _extensionUri) {
         this._disposables = [];
         this._history = [];
         this._panel = panel;
-        this._extensionUri = extensionUri;
         this._client = new sdk_1.default();
         this._panel.webview.html = this._getHtml();
         this._panel.onDidDispose(() => this.dispose(), null, this._disposables);

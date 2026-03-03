@@ -2,9 +2,8 @@ import { Command, Args } from '@oclif/core';
 import { GitClient, isAIAvailable } from '@kode/core';
 import { simpleGit } from 'simple-git';
 import Anthropic from '@anthropic-ai/sdk';
-import { render } from 'ink';
-import React from 'react';
-import { Spinner } from '../ui/Spinner.js';
+import { runWithSpinner } from '../utils/spinner.js';
+import { toErrorMessage } from '../utils/errors.js';
 import fs from 'fs-extra';
 import path from 'path';
 
@@ -93,7 +92,7 @@ export default class Blame extends Command {
 
         let insight = '';
         try {
-            await this.runWithSpinner('Generating AI insights…', async () => {
+            await runWithSpinner('Generating AI insights…', async () => {
                 const client = new Anthropic();
                 const contribSummary = sorted
                     .map(([author, d]) => `${author}: ${d.lines} lines (${Math.round((d.lines / d.totalLines) * 100)}%)`)
@@ -118,7 +117,7 @@ Be concise and factual. No markdown.`,
 
             this.log(`\n  🤖 ${insight}\n`);
         } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
+            const msg = toErrorMessage(err);
             if (msg.includes('credit balance')) {
                 this.log(`\n  ${this.dim('ℹ️  AI insights unavailable — credit balance too low.')}\n`);
             } else {
@@ -167,20 +166,7 @@ Be concise and factual. No markdown.`,
         return contributors;
     }
 
-    private async runWithSpinner(label: string, fn: () => Promise<void>): Promise<void> {
-        const { unmount, rerender } = render(React.createElement(Spinner, { label }));
-        try {
-            await fn();
-            rerender(React.createElement(Spinner, { label, done: true }));
-        } catch (err) {
-            rerender(React.createElement(Spinner, { label, failed: true }));
-            unmount();
-            throw err;
-        }
-        await new Promise((r) => setTimeout(r, 150));
-        unmount();
-    }
-
     private bold(text: string): string { return `\x1b[1m${text}\x1b[0m`; }
     private dim(text: string): string { return `\x1b[2m${text}\x1b[0m`; }
 }
+

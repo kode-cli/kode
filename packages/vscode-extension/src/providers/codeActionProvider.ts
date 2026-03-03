@@ -43,7 +43,7 @@ export async function analyzeDocument(
     diagnosticCollection.set(document.uri, diagnostics);
 }
 
-export class MyToolCodeActionProvider implements vscode.CodeActionProvider {
+export class KodeCodeActionProvider implements vscode.CodeActionProvider {
     provideCodeActions(
         document: vscode.TextDocument,
         range: vscode.Range

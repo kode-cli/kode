@@ -2,9 +2,8 @@ import { Command, Flags } from '@oclif/core';
 import { GitClient, isAIAvailable } from '@kode/core';
 import { simpleGit } from 'simple-git';
 import Anthropic from '@anthropic-ai/sdk';
-import { render } from 'ink';
-import React from 'react';
-import { Spinner } from '../ui/Spinner.js';
+import { runWithSpinner } from '../utils/spinner.js';
+import { toErrorMessage } from '../utils/errors.js';
 
 export default class Diff extends Command {
     static description = 'Show an AI explanation of your current changes';
@@ -78,7 +77,7 @@ export default class Diff extends Command {
         let explanation = '';
 
         try {
-            await this.runWithSpinner('Analyzing changes…', async () => {
+            await runWithSpinner('Analyzing changes…', async () => {
                 const client = new Anthropic();
                 const response = await client.messages.create({
                     model: 'claude-sonnet-4-6',
@@ -101,7 +100,7 @@ Be specific about the actual code changes. No bullet points. No markdown.`,
             this.log('\n🤖 What changed:\n');
             this.log(`  ${explanation}\n`);
         } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
+            const msg = toErrorMessage(err);
             if (msg.includes('credit balance')) {
                 this.log(`\n${this.dim('ℹ️  AI summary unavailable — credit balance too low.')}`);
                 this.log(`${this.dim('   Add credits at: https://console.anthropic.com')}\n`);
@@ -113,21 +112,6 @@ Be specific about the actual code changes. No bullet points. No markdown.`,
         this.log('💡 Tip: Run `kode commit` to commit these changes.\n');
     }
 
-    private async runWithSpinner(label: string, fn: () => Promise<void>): Promise<void> {
-        const { unmount, rerender } = render(
-            React.createElement(Spinner, { label })
-        );
-        try {
-            await fn();
-            rerender(React.createElement(Spinner, { label, done: true }));
-        } catch (err) {
-            rerender(React.createElement(Spinner, { label, failed: true }));
-            unmount();
-            throw err;
-        }
-        await new Promise((r) => setTimeout(r, 150));
-        unmount();
-    }
 
     private dim(text: string): string {
         return `\x1b[2m${text}\x1b[0m`;
