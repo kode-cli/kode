@@ -245,7 +245,7 @@ module.exports = {
   },
 };
 `;
-        await fs.writeFile(path.join(outputDir, 'kode.config.js'), configContent, 'utf-8');
+        await fs.writeFile(path.join(outputDir, 'kode.config.ts'), configContent, 'utf-8');
     }
 
     private dim(text: string): string {
