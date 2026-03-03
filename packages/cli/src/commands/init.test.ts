@@ -17,7 +17,7 @@ describe('kode init', () => {
     });
 
     it('creates a project directory from node-express template', async () => {
-        await execa('node', [KODE_BIN, 'init', projectName, '--template', 'node-express', '--no-git'], {
+        await execa('node', [KODE_BIN, 'init', projectName, '--template', 'node-express', '--no-git', '--no-install'], {
             cwd: tmpBase,
             env: { ...process.env, CI: 'true' },
         });
