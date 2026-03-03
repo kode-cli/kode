@@ -69,6 +69,8 @@ class Init extends Command {
             await this.runWithSpinner('Initializing Git…', async () => {
                 const git = simpleGit(outputDir);
                 await git.init();
+                await git.addConfig('user.email', 'kode-cli@init', false, 'local');
+                await git.addConfig('user.name', 'kode init', false, 'local');
                 await git.add('.');
                 await git.commit('chore: initial commit');
             });

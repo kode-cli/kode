@@ -70,7 +70,7 @@ const RollbackSchema = z.object({
 
 // ── Hooks ─────────────────────────────────────────────────────────────────────
 
-const HookCommandsSchema = z.union([
+const _HookCommandsSchema = z.union([
     z.string(),
     z.array(z.string()),
 ]);

@@ -32,7 +32,7 @@ const simple_git_1 = require("simple-git");
         (0, vitest_1.expect)(await git.isRepo()).toBe(true);
     });
     (0, vitest_1.it)('isRepo() returns false outside a git repo', async () => {
-        const outsideGit = new index_js_1.GitClient(os_1.default.tmpdir());
+        const _outsideGit = new index_js_1.GitClient(os_1.default.tmpdir());
         // os.tmpdir() itself is unlikely to be a git repo
         // We create a truly non-git dir to be safe
         const nonGitDir = await fs_extra_1.default.mkdtemp(path_1.default.join(os_1.default.tmpdir(), 'kode-non-git-'));

@@ -78,7 +78,7 @@ export default class DeployStatus extends Command {
         // ── Production ────────────────────────────────────────────────────────
         if (checkProd && config.environments.production) {
             const servers = config.environments.production.servers;
-            const port = config.environments.production.port ?? 3000;
+            const _port = config.environments.production.port ?? 3000;
             const containerName = `${appName}-production`;
 
             this.log(`  🚀 ${this.bold('Production')} (Remote SSH)`);

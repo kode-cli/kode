@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach, beforeAll } from 'vitest';
+import { describe, it, expect, afterEach } from 'vitest';
 import { execa } from 'execa';
 import fs from 'fs-extra';
 import os from 'os';

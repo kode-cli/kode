@@ -40,7 +40,7 @@ export default class History extends Command {
         const history = new DeployHistory(cwd, config.rollback?.historyFile);
         const environment = flags.env as 'staging' | 'production' | undefined;
 
-        let records = environment
+        const records = environment
             ? await history.getLatest(environment, flags.count)
             : (await history.load()).slice(0, flags.count);
 

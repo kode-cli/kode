@@ -12,7 +12,7 @@ export default tseslint.config(
             // Warn on explicit `any` usage instead of hard error — too noisy in a broad monorepo config
             '@typescript-eslint/no-explicit-any': 'warn',
             // Allow empty catch blocks (common in graceful fallback patterns)
-            'no-empty': ['error', { allowEmptyCatchBlocks: true }],
+            'no-empty': ['error', { allowEmptyCatch: true }],
         },
     }
 );

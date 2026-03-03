@@ -34,7 +34,7 @@ describe('GitClient', () => {
     });
 
     it('isRepo() returns false outside a git repo', async () => {
-        const outsideGit = new GitClient(os.tmpdir());
+        const _outsideGit = new GitClient(os.tmpdir());
         // os.tmpdir() itself is unlikely to be a git repo
         // We create a truly non-git dir to be safe
         const nonGitDir = await fs.mkdtemp(path.join(os.tmpdir(), 'kode-non-git-'));
