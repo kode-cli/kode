@@ -1,6 +1,6 @@
 {
   "name": "kode",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "Kode — AI-powered developer productivity suite (monorepo root)",
@@ -18,22 +18,19 @@
     "packages/vscode-extension"
   ],
   "scripts": {
-    "build":         "npm run build --workspaces --if-present",
-    "build:core":    "npm run build --workspace packages/core",
-    "build:cli":     "npm run build --workspace packages/cli",
-    "test":          "npm run test --workspaces --if-present",
-    "lint":          "npm run lint --workspaces --if-present",
-    "clean":         "npm run clean --workspaces --if-present",
-
+    "build": "npm run build --workspaces --if-present",
+    "build:core": "npm run build --workspace packages/core",
+    "build:cli": "npm run build --workspace packages/cli",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
     "version:patch": "node scripts/version-sync.js patch",
     "version:minor": "node scripts/version-sync.js minor",
     "version:major": "node scripts/version-sync.js major",
-
-    "link:global":   "npm run build && cd packages/cli && npm link",
-    "unlink:global": "npm unlink -g @kode/cli",
-
-    "publish:cli":   "npm run build && npm publish --workspace packages/cli --access public",
-    "prerelease":    "npm run build && npm run test"
+    "link:global": "npm run build && cd packages/cli && npm link",
+    "unlink:global": "npm unlink -g @kode-tools/cli",
+    "publish:cli": "npm run build && npm publish --workspace packages/cli --access public",
+    "prerelease": "npm run build && npm run test"
   },
   "engines": {
     "node": ">=18.0.0"

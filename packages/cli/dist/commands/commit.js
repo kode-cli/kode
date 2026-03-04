@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { GitClient, generateCommitMessage, isAIAvailable, runQualityGate, runLint, runTests, printReport, loadConfig, } from '@kode/core';
+import { GitClient, generateCommitMessage, isAIAvailable, runQualityGate, runLint, runTests, printReport, loadConfig, } from '@kode-tools/core';
 import { confirm, input } from '@inquirer/prompts';
 import { runWithSpinner } from '../utils/spinner.js';
 import { toErrorMessage } from '../utils/errors.js';

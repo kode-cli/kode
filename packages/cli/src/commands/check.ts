@@ -4,8 +4,8 @@ import {
     runLint,
     runTests,
     runSecurityScan,
-} from '@kode/core';
-import type { CheckResult } from '@kode/core';
+} from '@kode-tools/core';
+import type { CheckResult } from '@kode-tools/core';
 import { render } from 'ink';
 import React from 'react';
 import { Spinner } from '../ui/Spinner.js';

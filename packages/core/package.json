@@ -1,10 +1,12 @@
 {
-  "name": "@kode/core",
-  "version": "0.0.1",
+  "name": "@kode-tools/core",
+  "version": "1.0.1",
   "description": "Shared Core Engine for Kode",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",

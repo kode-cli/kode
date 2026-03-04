@@ -9,7 +9,7 @@ import {
     runHooks,
     sendNotification,
     DeployHistory, BuildResult,
-} from '@kode/core';
+} from '@kode-tools/core';
 import { confirm } from '@inquirer/prompts';
 import { render } from 'ink';
 import React from 'react';

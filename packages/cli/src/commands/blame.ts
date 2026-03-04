@@ -1,5 +1,5 @@
 import { Command, Args } from '@oclif/core';
-import { GitClient, isAIAvailable } from '@kode/core';
+import { GitClient, isAIAvailable } from '@kode-tools/core';
 import { simpleGit } from 'simple-git';
 import Anthropic from '@anthropic-ai/sdk';
 import { runWithSpinner } from '../utils/spinner.js';

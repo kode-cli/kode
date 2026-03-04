@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { loadConfig, runLint, runTests, runSecurityScan, } from '@kode/core';
+import { loadConfig, runLint, runTests, runSecurityScan, } from '@kode-tools/core';
 import { render } from 'ink';
 import React from 'react';
 import { Spinner } from '../ui/Spinner.js';

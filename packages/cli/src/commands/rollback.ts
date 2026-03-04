@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { loadDeployConfig, DeployHistory, sendNotification } from '@kode/core';
+import { loadDeployConfig, DeployHistory, sendNotification } from '@kode-tools/core';
 import { select } from '@inquirer/prompts';
 import { runWithSpinner } from '../utils/spinner.js';
 import { toErrorMessage } from '../utils/errors.js';
@@ -119,7 +119,7 @@ export default class Rollback extends Command {
     }
 
     private async rollbackStaging(
-        config: import('@kode/core').DeployConfig,
+        config: import('@kode-tools/core').DeployConfig,
         imageTag: string,
         appName: string
     ): Promise<void> {
@@ -142,7 +142,7 @@ export default class Rollback extends Command {
     }
 
     private async rollbackProduction(
-        config: import('@kode/core').DeployConfig,
+        config: import('@kode-tools/core').DeployConfig,
         imageTag: string,
         appName: string
     ): Promise<void> {

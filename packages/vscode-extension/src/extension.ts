@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { generateCodeStreaming, fixCode } from './ai/aiClient';
-import { GitClient } from '@kode/core';
+import { GitClient } from '@kode-tools/core';
 import { KodeCodeActionProvider, diagnosticCollection, analyzeDocument } from './providers/codeActionProvider';
 import { ChatPanel } from './webview/ChatPanel';
 

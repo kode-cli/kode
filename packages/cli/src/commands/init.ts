@@ -1,5 +1,5 @@
 import { Command, Flags, Args } from '@oclif/core';
-import { renderTemplate } from '@kode/core';
+import { renderTemplate } from '@kode-tools/core';
 import { select, input, confirm } from '@inquirer/prompts';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -220,7 +220,7 @@ ${repoUrl ? `\n   🔗 GitHub: ${repoUrl}\n` : ''}`);
         projectName: string,
         template: Template
     ): Promise<void> {
-        const configContent = `/** @type {import('@kode/core').KodeConfig} */
+        const configContent = `/** @type {import('@kode-tools/core').KodeConfig} */
 module.exports = {
   project: {
     name: '${projectName}',

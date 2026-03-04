@@ -5,7 +5,7 @@ import {
     getGlobalConfigValue,
     deleteGlobalConfigValue,
     getConfigFilePath,
-} from '@kode/core';
+} from '@kode-tools/core';
 
 const SENSITIVE = new Set(['ANTHROPIC_API_KEY', 'SLACK_WEBHOOK_URL', 'PROD_JWT_SECRET']);
 

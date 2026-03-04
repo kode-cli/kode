@@ -2,14 +2,26 @@
   "name": "kode-vscode",
   "displayName": "Kode",
   "description": "AI-powered code generation, inline review, and Git automation",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "publisher": "kode",
   "engines": {
     "vscode": "^1.85.0"
   },
-  "categories": ["Other", "Machine Learning", "Linters"],
-  "keywords": ["ai", "code generation", "code review", "claude", "anthropic"],
-  "activationEvents": ["onStartupFinished"],
+  "categories": [
+    "Other",
+    "Machine Learning",
+    "Linters"
+  ],
+  "keywords": [
+    "ai",
+    "code generation",
+    "code review",
+    "claude",
+    "anthropic"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./dist/extension.js",
   "scripts": {
     "build": "tsc",
@@ -59,7 +71,11 @@
         },
         "kode.reviewSeverityThreshold": {
           "type": "string",
-          "enum": ["error", "warning", "info"],
+          "enum": [
+            "error",
+            "warning",
+            "info"
+          ],
           "default": "warning",
           "description": "Minimum severity level to show as an inline diagnostic"
         },
@@ -105,7 +121,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.20.0",
-    "@kode/core": "*"
+    "@kode-tools/core": "*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

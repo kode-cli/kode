@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { loadDeployConfig } from '@kode/core';
+import { loadDeployConfig } from '@kode-tools/core';
 import { execa } from 'execa';
 
 export default class DeployStatus extends Command {

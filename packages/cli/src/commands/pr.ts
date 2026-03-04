@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { GitClient, generatePRDescription, isAIAvailable } from '@kode/core';
+import { GitClient, generatePRDescription, isAIAvailable } from '@kode-tools/core';
 import { runWithSpinner } from '../utils/spinner.js';
 import { toErrorMessage } from '../utils/errors.js';
 

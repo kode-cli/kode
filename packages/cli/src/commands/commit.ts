@@ -8,8 +8,8 @@ import {
     runTests,
     printReport,
     loadConfig,
-} from '@kode/core';
-import type { QualityCheck } from '@kode/core';
+} from '@kode-tools/core';
+import type { QualityCheck } from '@kode-tools/core';
 import { confirm, input } from '@inquirer/prompts';
 import { runWithSpinner } from '../utils/spinner.js';
 import { toErrorMessage } from '../utils/errors.js';

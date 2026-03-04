@@ -1,5 +1,5 @@
 import { Command } from '@oclif/core';
-import { readGlobalConfig } from '@kode/core';
+import { readGlobalConfig } from '@kode-tools/core';
 import { simpleGit } from 'simple-git';
 
 interface Check {

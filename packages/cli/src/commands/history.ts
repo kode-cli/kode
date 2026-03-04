@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { loadDeployConfig, DeployHistory } from '@kode/core';
+import { loadDeployConfig, DeployHistory } from '@kode-tools/core';
 
 export default class History extends Command {
     static description = 'Show deployment history';

@@ -1,5 +1,5 @@
 import { Command, Args, Flags } from '@oclif/core';
-import { isAIAvailable } from '@kode/core';
+import { isAIAvailable } from '@kode-tools/core';
 import Anthropic from '@anthropic-ai/sdk';
 import { runWithSpinner } from '../utils/spinner.js';
 import { toErrorMessage } from '../utils/errors.js';

@@ -37,7 +37,7 @@ exports.activate = activate;
 exports.deactivate = deactivate;
 const vscode = __importStar(require("vscode"));
 const aiClient_1 = require("./ai/aiClient");
-const core_1 = require("@kode/core");
+const core_1 = require("@kode-tools/core");
 const codeActionProvider_1 = require("./providers/codeActionProvider");
 const ChatPanel_1 = require("./webview/ChatPanel");
 let statusBarItem;

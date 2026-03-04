@@ -1,5 +1,5 @@
 import { Command, Args, Flags } from '@oclif/core';
-import { isAIAvailable } from '@kode/core';
+import { isAIAvailable } from '@kode-tools/core';
 import Anthropic from '@anthropic-ai/sdk';
 import { input } from '@inquirer/prompts';
 import { runWithSpinner } from '../utils/spinner.js';

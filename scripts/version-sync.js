@@ -71,7 +71,7 @@ for (const pkgPath of PACKAGES) {
     for (const depField of ['dependencies', 'devDependencies', 'peerDependencies']) {
         if (!pkg[depField]) continue;
         for (const dep of Object.keys(pkg[depField])) {
-            if (dep.startsWith('@kode/') && pkg[depField][dep] === '*') {
+            if (dep.startsWith('@kode-tools/') && pkg[depField][dep] === '*') {
                 // Leave "*" as-is — monorepo workspace resolution handles it
             }
         }

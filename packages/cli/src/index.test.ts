@@ -8,8 +8,8 @@ describe('Stage 1.1 — CLI package smoke test', () => {
     });
 
     it('core dependency is resolvable', async () => {
-        // Verify the workspace link to @kode/core resolves
-        const core = await import('@kode/core');
+        // Verify the workspace link to @kode-tools/core resolves
+        const core = await import('@kode-tools/core');
         expect(core).toBeDefined();
     });
 });

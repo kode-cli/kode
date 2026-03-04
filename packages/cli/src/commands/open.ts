@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { GitClient } from '@kode/core';
+import { GitClient } from '@kode-tools/core';
 import { simpleGit } from 'simple-git';
 import { execa } from 'execa';
 import { toHttpsUrl } from '../utils/git.js';

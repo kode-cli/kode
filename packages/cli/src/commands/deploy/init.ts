@@ -2,7 +2,7 @@ import { Command } from '@oclif/core';
 import { select, input, confirm } from '@inquirer/prompts';
 import fs from 'fs-extra';
 import path from 'path';
-import { DEFAULT_CONTAINER_PORTS, type ProjectType } from '@kode/core';
+import { DEFAULT_CONTAINER_PORTS, type ProjectType } from '@kode-tools/core';
 
 // Local labels used only for display / Dockerfile generation
 type LocalProjectType = 'nextjs' | 'react' | 'express' | 'node';
@@ -187,7 +187,7 @@ export default class DeployInit extends Command {
         useRollback: boolean;
     }): string {
         const lines: string[] = [
-            `/** @type {import('@kode/core').DeployConfig} */`,
+            `/** @type {import('@kode-tools/core').DeployConfig} */`,
             `module.exports = {`,
             ``,
             `  project: {`,

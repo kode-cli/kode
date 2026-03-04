@@ -18,7 +18,7 @@ async function bootstrap() {
     try {
         const { createRequire } = await import('module');
         const require = createRequire(import.meta.url);
-        const corePath = require.resolve('@kode/core');
+        const corePath = require.resolve('@kode-tools/core');
         const core = await import(corePath);
         if (typeof core.injectGlobalConfig === 'function') {
             await core.injectGlobalConfig();

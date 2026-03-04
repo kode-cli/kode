@@ -1,6 +1,6 @@
 {
-  "name": "@kode/cli",
-  "version": "0.1.0",
+  "name": "@kode-tools/cli",
+  "version": "1.0.1",
   "description": "AI-powered developer productivity CLI — commit, deploy, review, and ship faster",
   "author": "Kode Contributors",
   "license": "MIT",
@@ -13,64 +13,66 @@
     "url": "https://github.com/kode-cli/kode/issues"
   },
   "keywords": [
-    "cli", "ai", "developer-tools", "git", "deploy", "docker", "ssh",
-    "anthropic", "claude", "commit", "automation"
+    "cli",
+    "ai",
+    "developer-tools",
+    "git",
+    "deploy",
+    "docker",
+    "ssh",
+    "anthropic",
+    "claude",
+    "commit",
+    "automation"
   ],
-
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
     "kode": "./bin/run.js"
   },
-
   "engines": {
     "node": ">=18.0.0"
   },
-
   "files": [
     "bin",
     "dist",
     "oclif.manifest.json",
     "README.md"
   ],
-
   "scripts": {
-    "build":      "tsc -p tsconfig.json",
-    "prepack":    "npm run build && oclif manifest",
-    "postpack":   "rm -f oclif.manifest.json",
-    "lint":       "eslint src --ext .ts",
-    "clean":      "rm -rf dist oclif.manifest.json",
-
-    "deploy:staging":    "node bin/run.js deploy --staging",
+    "build": "tsc -p tsconfig.json",
+    "prepack": "npm run build && npx oclif manifest",
+    "postpack": "rm -f oclif.manifest.json",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist oclif.manifest.json",
+    "deploy:staging": "node bin/run.js deploy --staging",
     "deploy:production": "node bin/run.js deploy --prod",
-    "deploy:rollback":   "node bin/run.js rollback",
-    "deploy:check":      "node bin/run.js deploy --dry-run"
+    "deploy:rollback": "node bin/run.js rollback",
+    "deploy:check": "node bin/run.js deploy --dry-run"
   },
-
   "dependencies": {
-    "@anthropic-ai/sdk":  "^0.39.0",
-    "@inquirer/prompts":  "^7.5.2",
-    "@kode/core":         "*",
-    "@oclif/core":        "^3.27.0",
-    "fs-extra":           "^11.3.0",
-    "ink":                "^5.2.0",
-    "react":              "^18.3.1",
-    "simple-git":         "^3.27.0"
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@inquirer/prompts": "^7.5.2",
+    "@kode-tools/core": "*",
+    "@oclif/core": "^3.27.0",
+    "fs-extra": "^11.3.0",
+    "ink": "^5.2.0",
+    "react": "^18.3.1",
+    "simple-git": "^3.27.0"
   },
-
   "devDependencies": {
-    "@oclif/test":        "^3.2.15",
-    "@types/fs-extra":    "^11.0.4",
-    "@types/node":        "^22.13.0",
-    "@types/react":       "^18.3.18",
-    "typescript":         "^5.7.3"
+    "@oclif/test": "^3.2.15",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.13.0",
+    "@types/react": "^18.3.18",
+    "oclif": "^3.17.2",
+    "typescript": "^5.7.3"
   },
-
   "oclif": {
-    "bin":       "kode",
-    "dirname":   "kode",
-    "commands":  "./dist/commands",
-    "plugins":   [],
+    "bin": "kode",
+    "dirname": "kode",
+    "commands": "./dist/commands",
+    "plugins": [],
     "topicSeparator": ":",
     "topics": {
       "config": {
