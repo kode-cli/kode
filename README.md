@@ -11,8 +11,9 @@ Scaffold projects, write smarter commits, enforce quality, deploy to staging and
 [![License: MIT](https://img.shields.io/badge/license-MIT-000?style=flat-square)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-000?style=flat-square)](https://nodejs.org)
 [![Built with Claude](https://img.shields.io/badge/AI-Claude%20API-000?style=flat-square)](https://anthropic.com)
+[![GitHub Issues](https://img.shields.io/github/issues/kode-cli/kode?color=000&style=flat-square)](https://github.com/kode-cli/kode/issues)
 
-[Getting Started](#getting-started) · [Commands](#commands) · [Configuration](#configuration) · [Deployment](#deployment) · [VS Code Extension](#vs-code-extension) · [Contributing](#contributing)
+[Installation](#installation) · [Getting Started](#getting-started) · [Commands](#commands) · [Deployment](#deployment) · [Configuration](#configuration) · [VS Code Extension](#vs-code-extension) · [Contributing](#contributing)
 
 ---
 
@@ -22,22 +23,16 @@ Scaffold projects, write smarter commits, enforce quality, deploy to staging and
 
 Kode is a developer productivity suite built around a single idea: **your tools should do the repetitive work so you can focus on building**.
 
-It wraps your entire development workflow — from project scaffolding to production deployment — into a set of composable CLI commands powered by Claude AI. Every command is designed to work standalone or chain together into a seamless pipeline.
+It wraps your entire development workflow — from project scaffolding to production deployment — into a set of composable CLI commands powered by Claude AI. Install it once globally, and it works from any project, in any terminal, forever.
 
 ```bash
-# One command does it all
-kode commit -p
-# → stages all files
-# → runs lint + tests
-# → generates an AI commit message
-# → pushes to remote
+# Works from anywhere on your laptop — no setup, no exports
+cd ~/any-project
 
-# Deploy to staging with one command
-kode deploy --staging
-# → runs pre-deploy checks
-# → builds Docker image
-# → starts container on Docker Desktop
-# → health checks your app
+kode commit -p          # stage → lint → test → AI message → push
+kode deploy --staging   # build → docker → health check
+kode deploy --prod      # build → SSH → rolling deploy → notify Slack
+kode doctor             # verify your whole setup in one command
 ```
 
 ---
@@ -46,8 +41,9 @@ kode deploy --staging
 
 | Category | What Kode does |
 |---|---|
+| **Global** | Persistent API key storage — set once, works in every terminal forever |
 | **Scaffolding** | Spin up new projects with templates, Git, and GitHub repos in seconds |
-| **AI Commits** | Generate Conventional Commits messages from your staged diff |
+| **AI Commits** | Generate Conventional Commit messages from your staged diff |
 | **Quality Gate** | Lint, test, and security scan before every push — automatically |
 | **Git Automation** | Smarter `diff`, `log`, `blame`, `sync`, `undo`, and `status` |
 | **Code Generation** | AI generates features, tests, and JSDoc comments for your files |
@@ -56,41 +52,52 @@ kode deploy --staging
 
 ---
 
-## Getting Started
+## Installation
 
 ### Prerequisites
 
-- Node.js ≥ 18.0.0
-- Git
-- Docker Desktop (for staging deployments)
-- An [Anthropic API key](https://console.anthropic.com) (for AI features)
+| Tool | Required for |
+|---|---|
+| Node.js ≥ 18 | Everything |
+| Git | All git commands |
+| Docker Desktop | Staging deployments |
+| Anthropic API key | All AI features |
 
-### Installation
+### Install globally
 
 ```bash
 npm install -g @kode/cli
 ```
 
-### Set your API key
+### One-time setup
 
 ```bash
-export ANTHROPIC_API_KEY=your-key-here
+# 1. Store your API key — never type export again
+kode config set ANTHROPIC_API_KEY sk-ant-your-key-here
 
-# Make it permanent
-echo 'export ANTHROPIC_API_KEY=your-key-here' >> ~/.zshrc
+# 2. Verify everything is working
+kode doctor
+
+# 3. Install shell tab completions
+kode completion install
+source ~/.zshrc   # or ~/.bashrc
 ```
 
-### Your first project
+From this point on, `kode` works from any directory in any terminal with no additional setup.
+
+---
+
+## Getting Started
 
 ```bash
 # Scaffold a new project
 kode init my-api --template node-express
 
-# Move in and set up hooks
+# Move in and configure Git hooks + formatting
 cd my-api
 kode setup
 
-# Start building, then ship
+# Build something, then ship it
 kode commit -p
 ```
 
@@ -98,168 +105,143 @@ kode commit -p
 
 ## Commands
 
+### Setup & Health
+
+| Command | Description |
+|---|---|
+| `kode doctor` | Check Node, API key, Docker, Git, and GitHub CLI in one shot |
+| `kode config set <KEY> <VALUE>` | Store a value in `~/.kode/config.json` |
+| `kode config get <KEY>` | Read a stored value |
+| `kode config list` | Show all stored values (secrets masked) |
+| `kode config delete <KEY>` | Remove a stored value |
+| `kode completion install` | Install shell completions (auto-detects zsh/bash/fish) |
+| `kode completion install --zsh` | Force zsh |
+| `kode completion install --bash` | Force bash |
+| `kode completion install --fish` | Force fish |
+| `kode completion uninstall` | Remove shell completions |
+
 ### Project
 
 | Command | Description |
 |---|---|
-| `kode init <name>` | Scaffold a new project from a template |
-| `kode init <name> --template react-app` | Use a specific template |
-| `kode init <name> --no-install` | Skip installing dependencies |
+| `kode init <n>` | Scaffold a new project from a template |
+| `kode init <n> --template react-app` | Use a specific template |
+| `kode init <n> --no-install` | Skip installing dependencies |
 | `kode add <feature>` | AI generates a new feature or component |
-| `kode rename <old> <new>` | Safely rename across the entire project |
+| `kode rename <old> <new>` | Safely rename a function/variable across the whole project |
 
 ### Git & Commits
 
 | Command | Description |
 |---|---|
-| `kode commit` | Stage all, run checks, generate AI commit message |
+| `kode commit` | Stage all → run checks → generate AI commit message |
 | `kode commit -p` | Same as above, then push to remote |
 | `kode commit --no-check` | Skip quality checks |
 | `kode commit --no-add` | Use already-staged files only |
 | `kode pr` | Generate AI pull request description from commits |
 | `kode sync` | Pull (rebase) + push in one command |
 | `kode undo` | Revert last commit, keep changes staged |
-| `kode undo --hard` | Discard last commit and all changes |
+| `kode undo --hard` | Discard last commit and all changes permanently |
 
 ### Inspection
 
 | Command | Description |
 |---|---|
-| `kode status` | Beautiful overview of git status + recent commits |
-| `kode diff` | AI explanation of current changes |
-| `kode diff --staged` | Show only staged changes |
+| `kode status` | Git status + branch + recent commits, beautifully formatted |
+| `kode diff` | AI explanation of current unstaged changes |
+| `kode diff --staged` | AI explanation of staged changes only |
 | `kode log` | AI-summarized commit history |
 | `kode log -n 20` | Show last 20 commits |
-| `kode blame <file>` | Who changed what, with AI insights |
+| `kode blame <file>` | Who changed what in a file, with AI insights |
 | `kode whoami` | Current git user, remote URL, and branch |
-| `kode open` | Open GitHub repo in browser |
-| `kode open --prs` | Open pull requests page |
-| `kode open --issues` | Open issues page |
-| `kode open --actions` | Open GitHub Actions page |
-| `kode stats` | Files, lines of code, contributors |
+| `kode open` | Open GitHub repo in the browser |
+| `kode open --prs` | Open the pull requests page |
+| `kode open --issues` | Open the issues page |
+| `kode open --actions` | Open GitHub Actions |
+| `kode stats` | Files, lines of code, top contributors |
 
 ### Quality
 
 | Command | Description |
 |---|---|
-| `kode check` | Run lint + tests + security scan |
+| `kode check` | Run lint + tests + security scan with live progress spinners |
 | `kode check --fix` | Auto-fix lint and formatting issues |
-| `kode check --only lint` | Run a single check |
+| `kode check --only lint` | Run a single check by name |
 | `kode setup` | Install Git hooks + `.editorconfig` + `.prettierrc` |
 
 ### AI Code Tools
 
 | Command | Description |
 |---|---|
-| `kode docs <file>` | Generate JSDoc/TSDoc comments |
-| `kode docs <file> --write` | Save documented version to file |
-| `kode test <file>` | Generate a Vitest test file |
+| `kode docs <file>` | Generate JSDoc/TSDoc comments for a file |
+| `kode docs <file> --write` | Save the documented version back to the file |
+| `kode test <file>` | Generate a Vitest test file for a source file |
 | `kode test <file> --write` | Save the test file to disk |
 
 ### Deployment
 
 | Command | Description |
 |---|---|
-| `kode deploy:init` | Interactive setup wizard — generates `kode.deploy.config.js` |
+| `kode deploy:init` | Interactive wizard — generates `kode.deploy.config.js` |
 | `kode deploy` | Deploy to default environment (staging) |
-| `kode deploy --staging` | Deploy to Docker Desktop |
-| `kode deploy --prod` | Deploy to remote server via SSH |
-| `kode deploy --dry-run` | Validate config and connections, no actual deploy |
+| `kode deploy --staging` | Build Docker image → run on Docker Desktop |
+| `kode deploy --prod` | Build → SSH to server → rolling deploy → health check |
+| `kode deploy --dry-run` | Validate config and SSH connections without deploying |
 | `kode deploy --no-check` | Skip pre-deploy quality gate |
-| `kode deploy:status` | Show running container status per environment |
-| `kode rollback` | Interactive rollback to a previous version |
+| `kode deploy:status` | Show live container status per environment |
+| `kode rollback` | Interactive — choose from previous versions |
 | `kode rollback --env production` | Rollback a specific environment |
 | `kode rollback --version v1.2.3` | Rollback to a specific image tag |
 | `kode history` | Show full deployment history |
-| `kode history --env production` | Filter history by environment |
+| `kode history --env production` | Filter by environment |
 
 ---
 
-## Configuration
+## Global Config
 
-### Project config — `kode.config.js`
+Kode stores your configuration in `~/.kode/config.json` with file permissions `600` — only your user can read it. Values are injected automatically before every command runs, so you never need to `export` anything.
 
-Create in your project root to configure quality checks, Git rules, and IDE settings:
+```bash
+kode config set ANTHROPIC_API_KEY sk-ant-...
+kode config set SLACK_WEBHOOK_URL https://hooks.slack.com/...
 
-```js
-/** @type {import('@kode/core').KodeConfig} */
-module.exports = {
-  project: {
-    name: 'my-api',
-    template: 'node-express',
-  },
-  git: {
-    branchPattern: /^(feature|fix|chore|docs|refactor|test)\/[a-z0-9-]+$/,
-    commitStyle: 'conventional-commits',
-    autoGenerateMessages: true,
-  },
-  quality: {
-    lint: true,
-    test: true,
-    security: false,
-    coverage: { enabled: false, threshold: 80 },
-    customChecks: [
-      { name: 'Type check', command: 'tsc --noEmit' },
-    ],
-  },
-  ide: {
-    reviewOnSave: true,
-    reviewSeverityThreshold: 'warning',
-    aiModel: 'claude-sonnet-4-6',
-  },
-};
+kode config list
+#  📁 /Users/you/.kode/config.json
+#  ───────────────────────────────────────────────────────
+#  ANTHROPIC_API_KEY                sk-ant-••••••••api4
+#  SLACK_WEBHOOK_URL                https://hooks.sl••••••••g/T
+#  ───────────────────────────────────────────────────────
 ```
 
-### Configuration reference
-
-| Field | Type | Default | Description |
-|---|---|---|---|
-| `git.branchPattern` | `RegExp` | `feature\|fix\|chore...` | Branch naming convention |
-| `git.commitStyle` | `string` | `conventional-commits` | Commit message style |
-| `quality.lint` | `boolean` | `true` | Run ESLint |
-| `quality.test` | `boolean` | `true` | Run Vitest |
-| `quality.security` | `boolean` | `false` | Run Semgrep |
-| `quality.coverage.threshold` | `number` | `80` | Minimum coverage % |
-| `quality.customChecks` | `array` | `[]` | Additional shell commands to run |
-| `ide.reviewOnSave` | `boolean` | `true` | Auto-review on file save in VS Code |
-| `ide.aiModel` | `string` | `claude-sonnet-4-6` | Claude model for all AI features |
+Shell environment always wins — if `ANTHROPIC_API_KEY` is already set in your shell, Kode uses that and ignores the stored value.
 
 ---
 
 ## Deployment
 
-Kode's deployment feature is config-driven — one file controls everything from Docker builds to SSH connections, health checks, rollbacks, and Slack notifications.
+Kode's deployment feature is config-driven. One file controls Docker builds, SSH connections, health checks, rollbacks, and Slack notifications.
 
 ### How the pipeline runs
 
 ```
 Trigger → Config Load → Pre-Deploy Checks → Docker Build
        → Deploy (Staging or Production) → Health Check
-       → Post-Deploy Hooks → Notify
+       → Post-Deploy Hooks → Notify Slack
 ```
 
 ### Quick start
 
 ```bash
-# 1. Generate your deploy config interactively
-kode deploy:init
-
-# 2. Validate everything (no actual deploy)
-kode deploy --dry-run
-
-# 3. Deploy to staging
-kode deploy --staging
-
-# 4. Check what's running
-kode deploy:status
-
-# 5. When ready, deploy to production
-kode deploy --prod
+kode deploy:init          # generate config interactively
+kode deploy --dry-run     # validate without deploying
+kode deploy --staging     # deploy to Docker Desktop
+kode deploy:status        # check running containers
+kode deploy --prod        # deploy to production
 ```
 
 ### Deploy config — `kode.deploy.config.js`
 
-Create in your project root. Only `project.name` is required — everything else has smart defaults:
+Only `project.name` is required:
 
 ```js
 /** @type {import('@kode/core').DeployConfig} */
@@ -269,16 +251,15 @@ module.exports = {
     name: 'my-app',                   // ✅ only required field
     dockerfile: './Dockerfile',
     buildContext: '.',
-    // registry: 'ghcr.io/my-org',   // required for multi-server production
-    // buildArgs: { NODE_VERSION: '20' },
+    // registry: 'ghcr.io/my-org',
   },
 
   environments: {
     staging: {
       target: 'docker-desktop',
       port: 3001,
-      // envFile: '.env.staging',
       restartPolicy: 'unless-stopped',
+      // envFile: '.env.staging',
     },
     production: {
       target: 'remote-ssh',
@@ -292,6 +273,7 @@ module.exports = {
         },
       ],
       port: 3000,
+      // envFile: '.env.production',
     },
   },
 
@@ -324,7 +306,7 @@ module.exports = {
 
   cli: {
     defaultEnv: 'staging',
-    confirmProduction: true,          // set false for CI/CD
+    confirmProduction: true,   // set false for CI/CD
   },
 
 };
@@ -336,14 +318,11 @@ module.exports = {
 # Make sure Docker Desktop is running
 docker info
 
-# Deploy
 kode deploy --staging
 
 # Verify
-docker ps                            # container should show "Up"
-curl http://localhost:3001/health    # should return {"status":"ok"}
-
-# View logs
+docker ps
+curl http://localhost:3001/health    # → {"status":"ok"}
 docker logs my-app-staging
 ```
 
@@ -354,52 +333,43 @@ docker logs my-app-staging
 ssh-keygen -t ed25519 -f ~/.ssh/deploy_key -N ""
 ssh-copy-id -i ~/.ssh/deploy_key.pub deploy@your-server
 
-# Set required env vars
-export PROD_SERVER_IP="123.456.789.0"
+# Set server IP
+kode config set PROD_SERVER_IP 123.456.789.0
 
 # Dry run first
 kode deploy --prod --dry-run
 
-# Deploy
+# Deploy — prompts for confirmation
 kode deploy --prod
-# → prompts: "Deploy to PRODUCTION? (y/N)"
 ```
 
 ### Deploy strategies
 
 | Strategy | How it works | Best for |
 |---|---|---|
-| `rolling` | One server at a time, old version stays live during rollout | Stateless APIs, gradual rollouts |
+| `rolling` | One server at a time — old version stays live during rollout | Stateless APIs, gradual rollouts |
 | `blue-green` | All new containers start before traffic cuts over | Zero-downtime, instant rollback |
-
-### Rollback
-
-```bash
-# Interactive — choose from recent versions
-kode rollback
-
-# Roll back a specific environment
-kode rollback --env production
-
-# Roll back to a specific version
-kode rollback --version v1.2.3-a1b2c3d
-
-# View deployment history
-kode history
-kode history --env production
-```
 
 ### Hook variables
 
-All hook scripts receive these environment variables automatically:
+All hook scripts receive these automatically:
 
-| Variable | Example value |
+| Variable | Example |
 |---|---|
-| `$IMAGE_TAG` | `ghcr.io/myorg/my-app:v1.0.0-a1b2c3d` |
+| `$IMAGE_TAG` | `ghcr.io/kode-cli/my-app:v1.0.0-a1b2c3d` |
 | `$VERSION` | `v1.0.0` |
 | `$GIT_SHA` | `a1b2c3d` |
 | `$ENVIRONMENT` | `staging` or `production` |
 | `$SERVER_LABEL` | `prod-1` |
+
+### Health check endpoint
+
+Your app needs a `GET /health` route returning HTTP 200:
+
+```typescript
+// Express
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
+```
 
 ### CI/CD integration
 
@@ -416,103 +386,98 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm install
+      - run: npm ci && npm install -g @kode/cli
       - run: kode deploy --staging
         env:
-          STAGING_DB: ${{ secrets.STAGING_DB }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          STAGING_DB:        ${{ secrets.STAGING_DB }}
 
   deploy-production:
     runs-on: ubuntu-latest
     needs: deploy-staging
     steps:
       - uses: actions/checkout@v4
-      - run: npm install
+      - run: npm ci && npm install -g @kode/cli
       - run: kode deploy --prod
         env:
-          PROD_SERVER_IP: ${{ secrets.PROD_SERVER_IP }}
-          PROD_DB:        ${{ secrets.PROD_DB }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PROD_SERVER_IP:    ${{ secrets.PROD_SERVER_IP }}
+          PROD_DB:           ${{ secrets.PROD_DB }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
-> **Important for CI:** Set `cli: { confirmProduction: false }` in your deploy config so the production prompt doesn't hang the pipeline.
+> Set `cli: { confirmProduction: false }` in your deploy config when running in CI so the production confirmation prompt doesn't hang the pipeline.
 
-### Health check endpoint
+---
 
-Your app needs a `GET /health` route returning HTTP 200:
+## How the quality gate works
 
-```typescript
-// Express
-app.get('/health', (req, res) => res.json({ status: 'ok' }));
+```
+kode commit -p
+
+  ✅  Staging all changes…
+
+  🔍  Running quality checks…
+  ✅  ESLint       412ms
+  ✅  Tests        1843ms
+  ✅  All checks passed!
+
+  ✅  Generating commit message…
+
+  Suggested: feat(auth): add JWT refresh token logic
+  ? Use this message? Yes
+
+  ✅  Committed
+  ✅  Pushing to remote…
+  🚀  Pushed.
+```
+
+If checks fail, you're prompted whether to fix or force-continue:
+
+```
+  ❌  ESLint       389ms
+     src/index.ts
+       6:7  error  'apiKey' is assigned but never used
+
+  ? Quality checks failed. Commit anyway? No
+  🚫  Aborted. Run `kode check --fix` to auto-fix.
 ```
 
 ---
 
 ## Templates
 
-Kode ships with two built-in templates:
-
-### `node-express`
-
-A production-ready Node.js + Express API with TypeScript, ESLint, Vitest, and a CI pipeline.
+### `node-express` — Node.js + Express + TypeScript
 
 ```bash
 kode init my-api --template node-express
 ```
 
-```
-my-api/
-├── src/
-│   └── index.ts        # Express entry point with /health route
-├── eslint.config.js
-├── tsconfig.json
-├── vitest.config.ts
-├── kode.config.js
-└── package.json
-```
+Includes: TypeScript, ESLint, Vitest, Dockerfile with `/health` route, CI pipeline.
 
-### `react-app`
-
-A Vite + React + TypeScript app with ESLint, Vitest, and a CI pipeline.
+### `react-app` — Vite + React + TypeScript
 
 ```bash
 kode init my-app --template react-app
 ```
 
-```
-my-app/
-├── src/
-│   ├── App.tsx
-│   └── main.tsx
-├── index.html
-├── vite.config.ts
-├── tsconfig.json
-├── kode.config.js
-└── package.json
-```
+Includes: TypeScript, ESLint, Vitest, Vite config, CI pipeline.
 
 ---
 
 ## VS Code Extension
 
-The Kode VS Code extension brings AI directly into your editor.
-
-### Installation
-
-Install from the [VS Code Marketplace](https://marketplace.visualstudio.com) by searching **Kode**.
-
-### Features
+Install from the [VS Code Marketplace](https://marketplace.visualstudio.com) — search **Kode**.
 
 | Command | Shortcut | Description |
 |---|---|---|
 | `Kode: Generate Code` | `Cmd+Shift+G` | Stream AI-generated code into the editor |
 | `Kode: Explain Code` | — | Plain-English explanation of selected code |
-| `Kode: Refactor Code` | — | Rewrite selection (Extract Function, Add Types, etc.) |
-| `Kode: Review File` | — | Inline diagnostics with AI-detected issues |
-| `Kode: Open Chat` | `Cmd+Shift+K` | Context-aware AI chat panel for the current file |
+| `Kode: Refactor Code` | — | AI rewrites the selection |
+| `Kode: Review File` | — | Inline diagnostics powered by Claude |
+| `Kode: Open Chat` | `Cmd+Shift+K` | Context-aware AI chat for the current file |
 
-### Settings
-
-Open VS Code Settings (`Cmd+,`) and search **Kode**:
+**Settings** (`Cmd+,` → search Kode):
 
 | Setting | Default | Description |
 |---|---|---|
@@ -522,88 +487,49 @@ Open VS Code Settings (`Cmd+,`) and search **Kode**:
 
 ---
 
-## How the quality gate works
-
-When you run `kode commit` or `kode check`, Kode runs your configured checks sequentially and stops on the first failure:
-
-```
-✅  Staging all changes…
-
-🔍 Running quality checks…
-
-✅ ESLint                      412ms
-✅ Tests                       1843ms
-
-✅ All 2 checks passed!
-
-✅  Generating commit message…
-
-Suggested message:
-
-  feat(auth): add JWT refresh token logic
-
-? Use this message? Yes
-
-✅ Committed: "feat(auth): add JWT refresh token logic"
-✅  Pushing to remote…
-🚀 Pushed to remote.
-```
-
-If checks fail you're prompted whether to proceed or abort:
-
-```
-❌ ESLint                      389ms
-
-   src/index.ts
-     6:7  error  'apiKey' is assigned a value but never used
-
-❌ 1 check failed.
-   Run `kode check --fix` to auto-fix lint issues.
-```
-
----
-
 ## Architecture
 
-Kode is a monorepo with three packages:
-
 ```
-kode/
+kode/                              github.com/kode-cli/kode
 ├── packages/
-│   ├── core/                    @kode/core — shared engine
+│   ├── core/                      @kode/core — shared engine
 │   │   └── src/
-│   │       ├── ai/              Claude API client, cache, retry
-│   │       ├── config/          Config loading and validation
-│   │       ├── deploy/          Full deployment engine
-│   │       │   ├── config.ts    Deploy config schema (Zod)
-│   │       │   ├── docker.ts    Image build and push
-│   │       │   ├── staging.ts   Docker Desktop deployer
-│   │       │   ├── production.ts SSH deployer (rolling + blue-green)
-│   │       │   ├── health.ts    Health check with auto-retry
-│   │       │   ├── hooks.ts     Hook runner with variable injection
-│   │       │   ├── notify.ts    Slack notifications
-│   │       │   ├── preflight.ts Pre-deploy checks
-│   │       │   └── history.ts   Deployment history log
-│   │       ├── git/             GitClient wrapper
-│   │       ├── quality/         Lint, test, security runners
-│   │       └── templates/       EJS template engine
+│   │       ├── ai/                Claude API client, LRU cache, retry
+│   │       ├── config/            Config loading and Zod validation
+│   │       ├── global/            ~/.kode/config.json store
+│   │       ├── deploy/            Full deployment engine
+│   │       │   ├── config.ts      Deploy config schema (Zod)
+│   │       │   ├── docker.ts      Image build and push
+│   │       │   ├── staging.ts     Docker Desktop deployer
+│   │       │   ├── production.ts  SSH deployer (rolling + blue-green)
+│   │       │   ├── health.ts      Health check with retry + auto-rollback
+│   │       │   ├── hooks.ts       Hook runner with variable injection
+│   │       │   ├── notify.ts      Slack notifications
+│   │       │   ├── preflight.ts   Pre-deploy checks
+│   │       │   └── history.ts     Deployment history log
+│   │       ├── git/               GitClient wrapper (simple-git)
+│   │       ├── quality/           Lint, test, security runners
+│   │       └── templates/         EJS project scaffolding engine
 │   │
-│   ├── cli/                     @kode/cli — CLI tool
-│   │   └── src/
-│   │       └── commands/        One file per command
+│   ├── cli/                       @kode/cli — the global command
+│   │   ├── bin/run.js             Entry: Node check + config injection
+│   │   └── src/commands/          One file per command
 │   │
-│   └── vscode-extension/        VS Code plugin
+│   └── vscode-extension/          VS Code plugin
 │       └── src/
-│           ├── ai/              Streaming code generation
-│           ├── providers/       Diagnostics and code actions
-│           └── webview/         Chat panel
+│           ├── ai/                Streaming code generation
+│           ├── providers/         Diagnostics and code lens
+│           └── webview/           Chat panel (React)
 │
-└── templates/
-    ├── node-express/
-    └── react-app/
+├── templates/
+│   ├── node-express/
+│   └── react-app/
+│
+└── scripts/
+    └── version-sync.js            Bump version across all packages
 ```
 
-The key design principle is the **shared Core Engine** — the CLI, VS Code extension, and deployment pipeline all import from `@kode/core`. Business logic lives in one place.
+The core design principle: **one shared engine**. The CLI, VS Code extension, and deployment pipeline all import from `@kode/core`. Business logic lives in exactly one place.
 
 ---
 
@@ -611,23 +537,23 @@ The key design principle is the **shared Core Engine** — the CLI, VS Code exte
 
 ```bash
 # Clone and install
-git clone https://github.com/yourname/kode.git
+git clone https://github.com/kode-cli/kode.git
 cd kode
 npm install
 
 # Build all packages
 npm run build
 
-# Run all tests
-npm test
-
 # Link CLI globally for local testing
-cd packages/cli && npm link
+npm run link:global
+
+# Verify your setup
+kode doctor
 
 # Create a feature branch
 git checkout -b feature/your-feature
 
-# Commit and push using Kode itself
+# Make your changes, then commit using Kode itself
 kode commit -p
 
 # Open a PR
@@ -636,11 +562,25 @@ kode pr
 
 ### Branch naming
 
-Branches must follow: `<type>/<description>`
-
-Valid types: `feature`, `fix`, `chore`, `docs`, `refactor`, `test`
+Must follow `<type>/<description>`. Valid types: `feature`, `fix`, `chore`, `docs`, `refactor`, `test`.
 
 Example: `feature/add-changelog-command`
+
+### Release process
+
+```bash
+npm run version:patch    # 0.1.0 → 0.1.1
+npm run version:minor    # 0.1.0 → 0.2.0
+npm run version:major    # 0.1.0 → 1.0.0
+
+npm run prerelease       # build + test
+npm run publish:cli      # publish @kode/cli to npm
+
+git add -A
+git commit -m "chore: release v0.2.0"
+git tag v0.2.0
+git push && git push --tags
+```
 
 ---
 
@@ -648,22 +588,45 @@ Example: `feature/add-changelog-command`
 
 - [ ] `kode changelog` — auto-generate `CHANGELOG.md` from commit history
 - [ ] `kode branch` — AI-suggested branch name from a task description
-- [ ] `kode stash` — named stash with AI-generated message
+- [ ] `kode stash` — named stash with AI-generated description
 - [ ] Template registry — publish and install community templates
-- [ ] Deploy: Kubernetes support
+- [ ] Deploy: Kubernetes provider
 - [ ] Deploy: AWS ECS / GCP Cloud Run providers
+- [ ] GitHub Actions: native `kode-cli/deploy-action`
+
+---
+
+## Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| `kode: command not found` | Run `npm run link:global` from monorepo root |
+| API key not loading automatically | Run `kode config list` to verify it's stored |
+| `kode doctor` shows Docker not running | Open Docker Desktop and wait for it to start |
+| SSH connection refused on deploy | Test manually: `ssh deploy@your-server` — check firewall and authorized_keys |
+| Health check fails immediately | Increase `startupGrace` in healthCheck config — your app may need more boot time |
+| Auto-rollback triggered unexpectedly | Check `docker logs my-app-production` on the server — rollback is a symptom, not the cause |
+| Shell completions not working | Run `source ~/.zshrc` (or `~/.bashrc`) in the current terminal after installing |
+
+---
+
+## Links
+
+- **Repository:** [github.com/kode-cli/kode](https://github.com/kode-cli/kode)
+- **Issues:** [github.com/kode-cli/kode/issues](https://github.com/kode-cli/kode/issues)
+- **npm:** [npmjs.com/package/@kode/cli](https://www.npmjs.com/package/@kode/cli)
+- **Powered by:** Kode CLI
 
 ---
 
 ## License
 
-MIT © Kode Contributors
+MIT © [Kode Contributors](https://github.com/kode-cli/kode/graphs/contributors)
 
 ---
 
 <div align="center">
 
-Built with ❤️ by the Kode Team.  
-Contributions welcome! Check out the [contributing guide](CONTRIBUTING.md) and our [GitHub repo]()
+Built with [Sovanra] · [Report a bug](https://github.com/kode-cli/kode/issues/new?labels=bug) · [Request a feature](https://github.com/kode-cli/kode/issues/new?labels=enhancement)
 
 </div>

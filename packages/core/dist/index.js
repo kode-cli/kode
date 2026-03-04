@@ -21,4 +21,6 @@ __exportStar(require("./git/index.js"), exports);
 __exportStar(require("./ai/index.js"), exports);
 __exportStar(require("./quality/index.js"), exports);
 __exportStar(require("./deploy/index.js"), exports);
+__exportStar(require("./global/index.js"), exports);
+__exportStar(require("./global/index.js"), exports);
 //# sourceMappingURL=index.js.map

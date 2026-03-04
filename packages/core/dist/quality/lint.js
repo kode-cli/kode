@@ -7,6 +7,33 @@ exports.runLint = runLint;
 const eslint_1 = require("eslint");
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const path_1 = __importDefault(require("path"));
+/** Common source directories / root-level globs to lint, in priority order. */
+const CANDIDATE_SOURCES = ['src', 'lib', 'app'];
+/**
+ * Resolves the list of source paths to pass to ESLint.
+ * Only includes directories that actually exist under `cwd`.
+ * Falls back to root-level `*.ts` / `*.js` files when no known dir is found.
+ */
+async function resolveLintTargets(cwd) {
+    const targets = [];
+    for (const dir of CANDIDATE_SOURCES) {
+        if (await fs_extra_1.default.pathExists(path_1.default.join(cwd, dir))) {
+            targets.push(`${dir}/`);
+        }
+    }
+    if (targets.length === 0) {
+        // Last-resort: lint any TS/JS files sitting at the project root
+        const rootEntries = await fs_extra_1.default.readdir(cwd);
+        const rootFiles = rootEntries.filter((f) => /\.(ts|tsx|js|jsx|mjs|cjs)$/.test(f));
+        targets.push(...rootFiles);
+    }
+    return targets;
+}
+/** Returns true when the error message is the ESLint "no matching files" error. */
+function isNoFilesError(err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    return msg.includes('No files matching') || msg.includes('All files matched by');
+}
 async function runLint(cwd, fix = false) {
     const start = Date.now();
     const configFiles = [
@@ -28,9 +55,18 @@ async function runLint(cwd, fix = false) {
             duration: Date.now() - start,
         };
     }
+    const targets = await resolveLintTargets(cwd);
+    if (targets.length === 0) {
+        return {
+            name: 'ESLint',
+            passed: true,
+            output: 'No source files found — skipping lint.',
+            duration: Date.now() - start,
+        };
+    }
     try {
         const eslint = new eslint_1.ESLint({ cwd, fix });
-        const results = await eslint.lintFiles(['src/']);
+        const results = await eslint.lintFiles(targets);
         if (fix)
             await eslint_1.ESLint.outputFixes(results);
         const errorCount = results.reduce((sum, r) => sum + r.errorCount, 0);
@@ -45,6 +81,16 @@ async function runLint(cwd, fix = false) {
         };
     }
     catch (err) {
+        // ESLint throws when none of the resolved targets match any files
+        // (e.g. an empty src/ dir). Treat this as a graceful skip.
+        if (isNoFilesError(err)) {
+            return {
+                name: 'ESLint',
+                passed: true,
+                output: 'No source files found — skipping lint.',
+                duration: Date.now() - start,
+            };
+        }
         return {
             name: 'ESLint',
             passed: false,

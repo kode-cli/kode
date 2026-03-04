@@ -7,20 +7,7 @@
 
 [7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90m/Users/vanra/WebstormProjects/kode/packages/core[39m
 
-[?25l [33m❯[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
-   [33m❯[39m Stage 1.2 — Core package exports[2m (4)[22m
-     [33m⠙[39m exports defineConfig from config
-     [90m·[39m exports renderTemplate from templates
-     [90m·[39m exports getAvailableTemplates from templates
-     [90m·[39m exports KodeConfigSchema from config
- [90m·[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
-   [33m❯[39m Stage 1.2 — Core package exports[2m (4)[22m
-     [33m⠹[39m exports defineConfig from config
-     [90m·[39m exports renderTemplate from templates
-     [90m·[39m exports getAvailableTemplates from templates
-     [90m·[39m exports KodeConfigSchema from config
- [33m❯[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l [33m❯[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
    [32m✓[39m LRU Cache[2m (4)[22m
    [32m✓[39m getCacheKey[2m (3)[22m
    [33m❯[39m withRetry[2m (5)[22m
@@ -29,11 +16,13 @@
      [90m·[39m throws after exhausting retries
      [90m·[39m does not retry on non-retryable errors
      [90m·[39m calls onFailedAttempt callback
- [90m·[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
- [90m·[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
- [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [33m❯[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [33m❯[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+   [33m❯[39m Stage 1.2 — Core package exports[2m (4)[22m
+     [33m⠙[39m exports defineConfig from config
+     [90m·[39m exports renderTemplate from templates
+     [90m·[39m exports getAvailableTemplates from templates
+     [90m·[39m exports KodeConfigSchema from config
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
    [32m✓[39m LRU Cache[2m (4)[22m
    [32m✓[39m getCacheKey[2m (3)[22m
    [33m❯[39m withRetry[2m (5)[22m
@@ -42,23 +31,51 @@
      [90m·[39m throws after exhausting retries
      [90m·[39m does not retry on non-retryable errors
      [90m·[39m calls onFailedAttempt callback
- [90m·[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
- [90m·[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
- [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G   [32m✓[39m getCacheKey[2m (3)[22m
+ [33m❯[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+   [33m❯[39m Stage 1.2 — Core package exports[2m (4)[22m
+     [33m⠹[39m exports defineConfig from config
+     [90m·[39m exports renderTemplate from templates
+     [90m·[39m exports getAvailableTemplates from templates
+     [90m·[39m exports KodeConfigSchema from config
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+   [32m✓[39m LRU Cache[2m (4)[22m
+   [32m✓[39m getCacheKey[2m (3)[22m
    [33m❯[39m withRetry[2m (5)[22m
      [32m✓[39m returns result on first success
      [32m✓[39m retries on failure and succeeds
      [33m⠙[39m throws after exhausting retries
      [90m·[39m does not retry on non-retryable errors
      [90m·[39m calls onFailedAttempt callback
- [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
-   [32m✓[39m renderTemplate[2m (6)[22m
-   [33m❯[39m node-express template[2m (2)[22m
-     [33m⠙[39m renders all expected files
-     [90m·[39m injects projectName into package.json
-   [90m·[39m react-app template[2m (2)[22m
-   [90m·[39m getAvailableTemplates[2m (2)[22m
+ [33m❯[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+   [33m❯[39m Stage 1.2 — Core package exports[2m (4)[22m
+     [33m⠸[39m exports defineConfig from config
+     [90m·[39m exports renderTemplate from templates
+     [90m·[39m exports getAvailableTemplates from templates
+     [90m·[39m exports KodeConfigSchema from config
+ [90m·[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+   [32m✓[39m LRU Cache[2m (4)[22m
+   [32m✓[39m getCacheKey[2m (3)[22m
+   [33m❯[39m withRetry[2m (5)[22m
+     [32m✓[39m returns result on first success
+     [32m✓[39m retries on failure and succeeds
+     [33m⠹[39m throws after exhausting retries
+     [90m·[39m does not retry on non-retryable errors
+     [90m·[39m calls onFailedAttempt callback
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [90m·[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+ [90m·[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+   [32m✓[39m LRU Cache[2m (4)[22m
+   [32m✓[39m getCacheKey[2m (3)[22m
+   [33m❯[39m withRetry[2m (5)[22m
+     [32m✓[39m returns result on first success
+     [32m✓[39m retries on failure and succeeds
+     [32m✓[39m throws after exhausting retries
+     [32m✓[39m does not retry on non-retryable errors
+     [33m⠙[39m calls onFailedAttempt callback
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [90m·[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
      [33m⠙[39m [2m[ beforeAll ][22m
@@ -71,18 +88,21 @@
      [90m·[39m commit() creates a new commit
    [90m·[39m validateBranchName[2m (2)[22m
  [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G   [32m✓[39m getCacheKey[2m (3)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+   [32m✓[39m LRU Cache[2m (4)[22m
+   [32m✓[39m getCacheKey[2m (3)[22m
    [33m❯[39m withRetry[2m (5)[22m
      [32m✓[39m returns result on first success
      [32m✓[39m retries on failure and succeeds
-     [33m⠹[39m throws after exhausting retries
-     [90m·[39m does not retry on non-retryable errors
-     [90m·[39m calls onFailedAttempt callback
+     [32m✓[39m throws after exhausting retries
+     [32m✓[39m does not retry on non-retryable errors
+     [33m⠹[39m calls onFailedAttempt callback
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
    [32m✓[39m renderTemplate[2m (6)[22m
    [33m❯[39m node-express template[2m (2)[22m
-     [32m✓[39m renders all expected files
-     [33m⠙[39m injects projectName into package.json
+     [33m⠙[39m renders all expected files
+     [90m·[39m injects projectName into package.json
    [90m·[39m react-app template[2m (2)[22m
    [90m·[39m getAvailableTemplates[2m (2)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
@@ -97,18 +117,13 @@
      [90m·[39m commit() creates a new commit
    [90m·[39m validateBranchName[2m (2)[22m
  [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G   [32m✓[39m getCacheKey[2m (3)[22m
-   [33m❯[39m withRetry[2m (5)[22m
-     [32m✓[39m returns result on first success
-     [32m✓[39m retries on failure and succeeds
-     [32m✓[39m throws after exhausting retries
-     [32m✓[39m does not retry on non-retryable errors
-     [33m⠙[39m calls onFailedAttempt callback
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
    [32m✓[39m renderTemplate[2m (6)[22m
    [33m❯[39m node-express template[2m (2)[22m
-     [32m✓[39m renders all expected files
-     [33m⠹[39m injects projectName into package.json
+     [33m⠹[39m renders all expected files
+     [90m·[39m injects projectName into package.json
    [90m·[39m react-app template[2m (2)[22m
    [90m·[39m getAvailableTemplates[2m (2)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
@@ -123,14 +138,14 @@
      [90m·[39m commit() creates a new commit
    [90m·[39m validateBranchName[2m (2)[22m
  [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
    [32m✓[39m renderTemplate[2m (6)[22m
-   [32m✓[39m node-express template[2m (2)[22m
-   [33m❯[39m react-app template[2m (2)[22m
-     [33m⠙[39m renders all expected files
+   [33m❯[39m node-express template[2m (2)[22m
+     [33m⠸[39m renders all expected files
      [90m·[39m injects projectName into package.json
+   [90m·[39m react-app template[2m (2)[22m
    [90m·[39m getAvailableTemplates[2m (2)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -144,14 +159,14 @@
      [90m·[39m commit() creates a new commit
    [90m·[39m validateBranchName[2m (2)[22m
  [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
    [32m✓[39m renderTemplate[2m (6)[22m
-   [32m✓[39m node-express template[2m (2)[22m
-   [33m❯[39m react-app template[2m (2)[22m
+   [33m❯[39m node-express template[2m (2)[22m
      [32m✓[39m renders all expected files
      [33m⠙[39m injects projectName into package.json
+   [90m·[39m react-app template[2m (2)[22m
    [90m·[39m getAvailableTemplates[2m (2)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -164,10 +179,22 @@
      [90m·[39m getStagedDiff() returns diff when a file is staged
      [90m·[39m commit() creates a new commit
    [90m·[39m validateBranchName[2m (2)[22m
- [90m·[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
- [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+ [33m❯[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+   [32m✓[39m KodeConfigSchema[2m (6)[22m
+   [32m✓[39m defineConfig[2m (2)[22m
+   [33m❯[39m loadConfig[2m (3)[22m
+     [33m⠙[39m throws a helpful error when no config file is found
+     [90m·[39m loads a real config file from fixtures
+     [90m·[39m throws a clear Zod error for invalid config
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+   [32m✓[39m renderTemplate[2m (6)[22m
+   [33m❯[39m node-express template[2m (2)[22m
+     [32m✓[39m renders all expected files
+     [33m⠹[39m injects projectName into package.json
+   [90m·[39m react-app template[2m (2)[22m
+   [90m·[39m getAvailableTemplates[2m (2)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
      [33m⠦[39m [2m[ beforeAll ][22m
@@ -179,11 +206,23 @@
      [90m·[39m getStagedDiff() returns diff when a file is staged
      [90m·[39m commit() creates a new commit
    [90m·[39m validateBranchName[2m (2)[22m
- [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
- [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
- [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+ [33m❯[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+   [32m✓[39m KodeConfigSchema[2m (6)[22m
+   [32m✓[39m defineConfig[2m (2)[22m
+   [33m❯[39m loadConfig[2m (3)[22m
+     [33m⠹[39m throws a helpful error when no config file is found
+     [90m·[39m loads a real config file from fixtures
+     [90m·[39m throws a clear Zod error for invalid config
+ [90m·[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+   [32m✓[39m renderTemplate[2m (6)[22m
+   [32m✓[39m node-express template[2m (2)[22m
+   [33m❯[39m react-app template[2m (2)[22m
+     [33m⠙[39m renders all expected files
+     [90m·[39m injects projectName into package.json
+   [90m·[39m getAvailableTemplates[2m (2)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
      [33m⠧[39m [2m[ beforeAll ][22m
@@ -195,11 +234,23 @@
      [90m·[39m getStagedDiff() returns diff when a file is staged
      [90m·[39m commit() creates a new commit
    [90m·[39m validateBranchName[2m (2)[22m
- [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [33m❯[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+   [32m✓[39m KodeConfigSchema[2m (6)[22m
+   [32m✓[39m defineConfig[2m (2)[22m
+   [33m❯[39m loadConfig[2m (3)[22m
+     [33m⠸[39m throws a helpful error when no config file is found
+     [90m·[39m loads a real config file from fixtures
+     [90m·[39m throws a clear Zod error for invalid config
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
- [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+   [32m✓[39m renderTemplate[2m (6)[22m
+   [32m✓[39m node-express template[2m (2)[22m
+   [33m❯[39m react-app template[2m (2)[22m
+     [33m⠹[39m renders all expected files
+     [90m·[39m injects projectName into package.json
+   [90m·[39m getAvailableTemplates[2m (2)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
      [33m⠇[39m [2m[ beforeAll ][22m
@@ -213,9 +264,15 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
- [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [33m❯[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+   [32m✓[39m renderTemplate[2m (6)[22m
+   [32m✓[39m node-express template[2m (2)[22m
+   [33m❯[39m react-app template[2m (2)[22m
+     [32m✓[39m renders all expected files
+     [33m⠙[39m injects projectName into package.json
+   [90m·[39m getAvailableTemplates[2m (2)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
      [33m⠏[39m [2m[ beforeAll ][22m
@@ -229,8 +286,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -245,8 +302,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -261,8 +318,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -277,8 +334,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -293,8 +350,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -309,8 +366,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -325,8 +382,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -341,8 +398,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -357,8 +414,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -373,12 +430,13 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
-     [33m⠙[39m isRepo() returns true inside a git repo
+     [33m⠏[39m [2m[ beforeAll ][22m
+     [90m·[39m isRepo() returns true inside a git repo
      [90m·[39m isRepo() returns false outside a git repo
      [90m·[39m getCurrentBranch() returns a branch name
      [90m·[39m getCommitHistory() returns commits
@@ -388,8 +446,56 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+ [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
+   [33m❯[39m GitClient[2m (7)[22m
+     [33m⠋[39m [2m[ beforeAll ][22m
+     [90m·[39m isRepo() returns true inside a git repo
+     [90m·[39m isRepo() returns false outside a git repo
+     [90m·[39m getCurrentBranch() returns a branch name
+     [90m·[39m getCommitHistory() returns commits
+     [90m·[39m getStagedDiff() returns empty string when nothing is staged
+     [90m·[39m getStagedDiff() returns diff when a file is staged
+     [90m·[39m commit() creates a new commit
+   [90m·[39m validateBranchName[2m (2)[22m
+ [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+ [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
+   [33m❯[39m GitClient[2m (7)[22m
+     [33m⠙[39m [2m[ beforeAll ][22m
+     [90m·[39m isRepo() returns true inside a git repo
+     [90m·[39m isRepo() returns false outside a git repo
+     [90m·[39m getCurrentBranch() returns a branch name
+     [90m·[39m getCommitHistory() returns commits
+     [90m·[39m getStagedDiff() returns empty string when nothing is staged
+     [90m·[39m getStagedDiff() returns diff when a file is staged
+     [90m·[39m commit() creates a new commit
+   [90m·[39m validateBranchName[2m (2)[22m
+ [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+ [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
+   [33m❯[39m GitClient[2m (7)[22m
+     [33m⠹[39m [2m[ beforeAll ][22m
+     [90m·[39m isRepo() returns true inside a git repo
+     [90m·[39m isRepo() returns false outside a git repo
+     [90m·[39m getCurrentBranch() returns a branch name
+     [90m·[39m getCommitHistory() returns commits
+     [90m·[39m getStagedDiff() returns empty string when nothing is staged
+     [90m·[39m getStagedDiff() returns diff when a file is staged
+     [90m·[39m commit() creates a new commit
+   [90m·[39m validateBranchName[2m (2)[22m
+ [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -403,8 +509,23 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+ [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
+   [33m❯[39m GitClient[2m (7)[22m
+     [32m✓[39m isRepo() returns true inside a git repo
+     [33m⠹[39m isRepo() returns false outside a git repo
+     [90m·[39m getCurrentBranch() returns a branch name
+     [90m·[39m getCommitHistory() returns commits
+     [90m·[39m getStagedDiff() returns empty string when nothing is staged
+     [90m·[39m getStagedDiff() returns diff when a file is staged
+     [90m·[39m commit() creates a new commit
+   [90m·[39m validateBranchName[2m (2)[22m
+ [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -418,8 +539,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -433,8 +554,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -448,8 +569,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -463,8 +584,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -478,8 +599,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -493,8 +614,23 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+ [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
+   [33m❯[39m GitClient[2m (7)[22m
+     [32m✓[39m isRepo() returns true inside a git repo
+     [32m✓[39m isRepo() returns false outside a git repo
+     [32m✓[39m getCurrentBranch() returns a branch name
+     [32m✓[39m getCommitHistory() returns commits
+     [33m⠴[39m getStagedDiff() returns empty string when nothing is staged
+     [90m·[39m getStagedDiff() returns diff when a file is staged
+     [90m·[39m commit() creates a new commit
+   [90m·[39m validateBranchName[2m (2)[22m
+ [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -508,8 +644,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -523,8 +659,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -538,8 +674,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -553,8 +689,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -568,8 +704,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -583,8 +719,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -598,8 +734,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -613,8 +749,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -628,8 +764,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -643,8 +779,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -658,8 +794,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -673,8 +809,8 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
  [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
    [33m❯[39m GitClient[2m (7)[22m
@@ -688,16 +824,31 @@
    [90m·[39m validateBranchName[2m (2)[22m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
-[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
- [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
  [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
- [32m✓[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m[33m 688[2mms[22m[39m
+ [33m❯[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m
+   [33m❯[39m GitClient[2m (7)[22m
+     [32m✓[39m isRepo() returns true inside a git repo
+     [32m✓[39m isRepo() returns false outside a git repo
+     [32m✓[39m getCurrentBranch() returns a branch name
+     [32m✓[39m getCommitHistory() returns commits
+     [32m✓[39m getStagedDiff() returns empty string when nothing is staged
+     [32m✓[39m getStagedDiff() returns diff when a file is staged
+     [33m⠦[39m commit() creates a new commit
+   [90m·[39m validateBranchName[2m (2)[22m
+ [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
+ [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/ai/[22mai[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/[22mindex[2m.test.ts[22m[2m (4)[22m
+ [32m✓[39m [2msrc/templates/[22mindex[2m.test.ts[22m[2m (12)[22m
+ [32m✓[39m [2msrc/git/[22mindex[2m.test.ts[22m[2m (9)[22m[33m 795[2mms[22m[39m
  [32m✓[39m [2msrc/config/[22mindex[2m.test.ts[22m[2m (11)[22m
  [32m✓[39m [2msrc/quality/[22mindex[2m.test.ts[22m[2m (4)[22m
 
 [2m Test Files [22m [1m[32m6 passed[39m[22m[90m (6)[39m
 [2m      Tests [22m [1m[32m52 passed[39m[22m[90m (52)[39m
-[2m   Start at [22m 16:02:30
-[2m   Duration [22m 936ms[2m (transform 173ms, setup 0ms, collect 388ms, tests 1.04s, environment 0ms, prepare 390ms)[22m
+[2m   Start at [22m 08:49:43
+[2m   Duration [22m 1.05s[2m (transform 98ms, setup 0ms, collect 369ms, tests 1.25s, environment 0ms, prepare 335ms)[22m
 
 [?25h[?25h⠙[1G[0K

@@ -1,28 +1,44 @@
 {
   "name": "kode",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Kode — Developer Productivity Suite monorepo",
+  "description": "Kode — AI-powered developer productivity suite (monorepo root)",
+  "homepage": "https://github.com/kode-cli/kode#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kode-cli/kode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kode-cli/kode/issues"
+  },
   "workspaces": [
-    "packages/*"
+    "packages/core",
+    "packages/cli",
+    "packages/vscode-extension"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "test": "turbo run test",
-    "lint": "turbo run lint",
-    "dev": "turbo run dev --parallel",
-    "clean": "turbo run clean && rm -rf node_modules"
-  },
-  "devDependencies": {
-    "dotenv": "^17.3.1",
-    "turbo": "^2.0.0",
-    "typescript": "^5.4.0",
-    "typescript-eslint": "^8.0.0"
+    "build":         "npm run build --workspaces --if-present",
+    "build:core":    "npm run build --workspace packages/core",
+    "build:cli":     "npm run build --workspace packages/cli",
+    "test":          "npm run test --workspaces --if-present",
+    "lint":          "npm run lint --workspaces --if-present",
+    "clean":         "npm run clean --workspaces --if-present",
+
+    "version:patch": "node scripts/version-sync.js patch",
+    "version:minor": "node scripts/version-sync.js minor",
+    "version:major": "node scripts/version-sync.js major",
+
+    "link:global":   "npm run build && cd packages/cli && npm link",
+    "unlink:global": "npm unlink -g @kode/cli",
+
+    "publish:cli":   "npm run build && npm publish --workspace packages/cli --access public",
+    "prerelease":    "npm run build && npm run test"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
+    "node": ">=18.0.0"
   },
-  "packageManager": "npm@11.6.2"
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
 }

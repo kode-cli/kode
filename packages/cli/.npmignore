@@ -1,0 +1,23 @@
+# Source (compiled to dist/ — not needed in npm package)
+src/
+tsconfig.json
+*.tsbuildinfo
+
+# Tests
+**/*.test.ts
+**/*.spec.ts
+__tests__/
+coverage/
+
+# Dev tooling
+.eslintrc*
+.prettierrc*
+.editorconfig
+.gitignore
+.env*
+
+# Build artifacts that are regenerated
+oclif.manifest.json
+
+# Monorepo files
+node_modules/

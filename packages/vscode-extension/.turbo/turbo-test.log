@@ -47,6 +47,18 @@
    [33m❯[39m Stage 1.1 — VS Code extension smoke test[2m (2)[22m
      [33m⠋[39m extension module is importable without vscode runtime
      [90m·[39m core dependency is resolvable
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/[22mextension[2m.test.ts[22m[2m (2)[22m
+   [33m❯[39m Stage 1.1 — VS Code extension smoke test[2m (2)[22m
+     [33m⠙[39m extension module is importable without vscode runtime
+     [90m·[39m core dependency is resolvable
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/[22mextension[2m.test.ts[22m[2m (2)[22m
+   [33m❯[39m Stage 1.1 — VS Code extension smoke test[2m (2)[22m
+     [33m⠹[39m extension module is importable without vscode runtime
+     [90m·[39m core dependency is resolvable
+[?25l[2K[1A[2K[1A[2K[1A[2K[1A[2K[G [33m❯[39m [2msrc/[22mextension[2m.test.ts[22m[2m (2)[22m
+   [33m❯[39m Stage 1.1 — VS Code extension smoke test[2m (2)[22m
+     [33m⠸[39m extension module is importable without vscode runtime
+     [90m·[39m core dependency is resolvable
 [2K[1A[2K[1A[2K[1A[2K[1A[2K[G [32m✓[39m [2msrc/[22mextension[2m.test.ts[22m[2m (2)[22m
    [32m✓[39m Stage 1.1 — VS Code extension smoke test[2m (2)[22m
      [32m✓[39m extension module is importable without vscode runtime
@@ -54,7 +66,7 @@
 
 [2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
 [2m      Tests [22m [1m[32m2 passed[39m[22m[90m (2)[39m
-[2m   Start at [22m 16:02:30
-[2m   Duration [22m 309ms[2m (transform 78ms, setup 0ms, collect 11ms, tests 164ms, environment 0ms, prepare 29ms)[22m
+[2m   Start at [22m 08:49:44
+[2m   Duration [22m 367ms[2m (transform 92ms, setup 0ms, collect 11ms, tests 213ms, environment 0ms, prepare 29ms)[22m
 
 [?25h[?25h⠙[1G[0K

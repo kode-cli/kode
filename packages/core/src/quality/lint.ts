@@ -3,6 +3,39 @@ import type { CheckResult } from './index.js';
 import fs from 'fs-extra';
 import path from 'path';
 
+/** Common source directories / root-level globs to lint, in priority order. */
+const CANDIDATE_SOURCES = ['src', 'lib', 'app'];
+
+/**
+ * Resolves the list of source paths to pass to ESLint.
+ * Only includes directories that actually exist under `cwd`.
+ * Falls back to root-level `*.ts` / `*.js` files when no known dir is found.
+ */
+async function resolveLintTargets(cwd: string): Promise<string[]> {
+    const targets: string[] = [];
+
+    for (const dir of CANDIDATE_SOURCES) {
+        if (await fs.pathExists(path.join(cwd, dir))) {
+            targets.push(`${dir}/`);
+        }
+    }
+
+    if (targets.length === 0) {
+        // Last-resort: lint any TS/JS files sitting at the project root
+        const rootEntries = await fs.readdir(cwd);
+        const rootFiles = rootEntries.filter((f) => /\.(ts|tsx|js|jsx|mjs|cjs)$/.test(f));
+        targets.push(...rootFiles);
+    }
+
+    return targets;
+}
+
+/** Returns true when the error message is the ESLint "no matching files" error. */
+function isNoFilesError(err: unknown): boolean {
+    const msg = err instanceof Error ? err.message : String(err);
+    return msg.includes('No files matching') || msg.includes('All files matched by');
+}
+
 export async function runLint(cwd: string, fix = false): Promise<CheckResult> {
     const start = Date.now();
 
@@ -28,9 +61,20 @@ export async function runLint(cwd: string, fix = false): Promise<CheckResult> {
         };
     }
 
+    const targets = await resolveLintTargets(cwd);
+
+    if (targets.length === 0) {
+        return {
+            name: 'ESLint',
+            passed: true,
+            output: 'No source files found — skipping lint.',
+            duration: Date.now() - start,
+        };
+    }
+
     try {
         const eslint = new ESLint({ cwd, fix });
-        const results = await eslint.lintFiles(['src/']);
+        const results = await eslint.lintFiles(targets);
 
         if (fix) await ESLint.outputFixes(results);
 
@@ -46,6 +90,17 @@ export async function runLint(cwd: string, fix = false): Promise<CheckResult> {
             duration: Date.now() - start,
         };
     } catch (err: unknown) {
+        // ESLint throws when none of the resolved targets match any files
+        // (e.g. an empty src/ dir). Treat this as a graceful skip.
+        if (isNoFilesError(err)) {
+            return {
+                name: 'ESLint',
+                passed: true,
+                output: 'No source files found — skipping lint.',
+                duration: Date.now() - start,
+            };
+        }
+
         return {
             name: 'ESLint',
             passed: false,

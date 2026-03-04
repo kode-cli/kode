@@ -4,4 +4,6 @@ export * from './git/index.js';
 export * from './ai/index.js';
 export * from './quality/index.js';
 export * from './deploy/index.js';
+export * from './global/index.js';
+export * from './global/index.js';
 //# sourceMappingURL=index.d.ts.map
