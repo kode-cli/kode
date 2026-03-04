@@ -4,6 +4,11 @@
   "description": "AI-powered code generation, inline review, and Git automation",
   "version": "1.0.3",
   "publisher": "kode",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kode-cli/kode.git"
+  },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -30,7 +35,7 @@
     "test": "vitest run",
     "lint": "eslint src --ext .ts",
     "clean": "rm -rf dist",
-    "package": "npx vsce package",
+    "package": "npx @vscode/vsce package --no-dependencies",
     "vscode:prepublish": "npm run build"
   },
   "contributes": {
