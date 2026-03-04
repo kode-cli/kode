@@ -1,6 +1,6 @@
 {
   "name": "@kode-tools/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "AI-powered developer productivity CLI — commit, deploy, review, and ship faster",
   "author": "Kode Contributors",
   "license": "MIT",

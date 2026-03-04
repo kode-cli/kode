@@ -9,6 +9,12 @@ jobs:
   publish:
     name: Publish to npm
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write  # required for npm provenance
+
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     steps:
       - name: Checkout code
@@ -22,7 +28,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build all packages
         run: npm run build
@@ -31,14 +37,7 @@ jobs:
         run: npm test
 
       - name: Publish CLI to npm
-        run: npm publish --workspace packages/cli --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Package VS Code Extension
-        run: |
-          cd packages/vscode-extension
-          npx vsce package
+        run: npm publish --workspace packages/cli --no-git-checks --provenance --access public
 
       - name: Publish VS Code Extension
         run: |
