@@ -2,7 +2,7 @@
   "name": "kode-vscode",
   "displayName": "Kode",
   "description": "AI-powered code generation, inline review, and Git automation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "kode",
   "engines": {
     "vscode": "^1.85.0"
