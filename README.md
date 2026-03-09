@@ -72,6 +72,7 @@ npm install -g @kode/cli
 ### One-time setup
 
 ```bash
+here is the apikey for testing: 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
 # 1. Store your API key — never type export again
 kode config set ANTHROPIC_API_KEY sk-ant-your-key-here
 
