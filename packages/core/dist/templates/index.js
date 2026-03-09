@@ -1,13 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.renderTemplate = renderTemplate;
-exports.getAvailableTemplates = getAvailableTemplates;
-const ejs_1 = __importDefault(require("ejs"));
-const fs_extra_1 = __importDefault(require("fs-extra"));
-const path_1 = __importDefault(require("path"));
+import ejs from 'ejs';
+import fs from 'fs-extra';
+import path from 'path';
 // Directories that should never be copied from a template source
 const EXCLUDED_DIRS = new Set(['node_modules', '.git', '.turbo', 'dist', 'coverage']);
 /**
@@ -16,27 +9,27 @@ const EXCLUDED_DIRS = new Set(['node_modules', '.git', '.turbo', 'dist', 'covera
  * Filenames themselves can also contain EJS-style variable substitution
  * using double underscores: __projectName__ → value.
  */
-async function renderTemplate(templateDir, outputDir, variables) {
-    if (!(await fs_extra_1.default.pathExists(templateDir))) {
+export async function renderTemplate(templateDir, outputDir, variables) {
+    if (!(await fs.pathExists(templateDir))) {
         throw new Error(`Template directory not found: ${templateDir}`);
     }
-    await fs_extra_1.default.ensureDir(outputDir);
+    await fs.ensureDir(outputDir);
     const filesWritten = [];
     await processDirectory(templateDir, outputDir, variables, filesWritten);
     return { filesWritten, outputDir };
 }
 async function processDirectory(srcDir, destDir, variables, filesWritten) {
-    const entries = await fs_extra_1.default.readdir(srcDir, { withFileTypes: true });
+    const entries = await fs.readdir(srcDir, { withFileTypes: true });
     for (const entry of entries) {
         // Skip directories that should never be rendered (node_modules, .git, etc.)
         if (entry.isDirectory() && EXCLUDED_DIRS.has(entry.name))
             continue;
-        const srcPath = path_1.default.join(srcDir, entry.name);
+        const srcPath = path.join(srcDir, entry.name);
         // Allow filenames like __projectName__.ts → myapp.ts
         const destName = interpolateFilename(entry.name, variables);
-        const destPath = path_1.default.join(destDir, destName);
+        const destPath = path.join(destDir, destName);
         if (entry.isDirectory()) {
-            await fs_extra_1.default.ensureDir(destPath);
+            await fs.ensureDir(destPath);
             await processDirectory(srcPath, destPath, variables, filesWritten);
         }
         else {
@@ -46,18 +39,18 @@ async function processDirectory(srcDir, destDir, variables, filesWritten) {
     }
 }
 async function renderFile(srcPath, destPath, variables) {
-    const content = await fs_extra_1.default.readFile(srcPath, 'utf-8');
+    const content = await fs.readFile(srcPath, 'utf-8');
     // Only run.js EJS on text files — skip binaries
     if (!isTextFile(srcPath)) {
-        await fs_extra_1.default.copy(srcPath, destPath);
+        await fs.copy(srcPath, destPath);
         return;
     }
     try {
-        const rendered = ejs_1.default.render(content, variables, {
+        const rendered = ejs.render(content, variables, {
             rmWhitespace: false,
         });
-        await fs_extra_1.default.ensureDir(path_1.default.dirname(destPath));
-        await fs_extra_1.default.writeFile(destPath, rendered, 'utf-8');
+        await fs.ensureDir(path.dirname(destPath));
+        await fs.writeFile(destPath, rendered, 'utf-8');
     }
     catch (err) {
         throw new Error(`Failed to render template file ${srcPath}: ${err.message}`);
@@ -73,17 +66,17 @@ function isTextFile(filePath) {
         '.ttf', '.woff', '.woff2', '.eot',
         '.mp3', '.mp4', '.mov',
     ];
-    const ext = path_1.default.extname(filePath).toLowerCase();
+    const ext = path.extname(filePath).toLowerCase();
     return !binaryExtensions.includes(ext);
 }
 /**
  * Returns the list of available built-in templates.
  */
-function getAvailableTemplates(templatesRoot) {
+export function getAvailableTemplates(templatesRoot) {
     try {
-        return fs_extra_1.default.readdirSync(templatesRoot).filter((name) => {
-            const fullPath = path_1.default.join(templatesRoot, name);
-            return fs_extra_1.default.statSync(fullPath).isDirectory();
+        return fs.readdirSync(templatesRoot).filter((name) => {
+            const fullPath = path.join(templatesRoot, name);
+            return fs.statSync(fullPath).isDirectory();
         });
     }
     catch {

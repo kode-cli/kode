@@ -1,12 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.runLint = runLint;
-const eslint_1 = require("eslint");
-const fs_extra_1 = __importDefault(require("fs-extra"));
-const path_1 = __importDefault(require("path"));
+import { ESLint } from 'eslint';
+import fs from 'fs-extra';
+import path from 'path';
 /** Common source directories / root-level globs to lint, in priority order. */
 const CANDIDATE_SOURCES = ['src', 'lib', 'app'];
 /**
@@ -17,13 +11,13 @@ const CANDIDATE_SOURCES = ['src', 'lib', 'app'];
 async function resolveLintTargets(cwd) {
     const targets = [];
     for (const dir of CANDIDATE_SOURCES) {
-        if (await fs_extra_1.default.pathExists(path_1.default.join(cwd, dir))) {
+        if (await fs.pathExists(path.join(cwd, dir))) {
             targets.push(`${dir}/`);
         }
     }
     if (targets.length === 0) {
         // Last-resort: lint any TS/JS files sitting at the project root
-        const rootEntries = await fs_extra_1.default.readdir(cwd);
+        const rootEntries = await fs.readdir(cwd);
         const rootFiles = rootEntries.filter((f) => /\.(ts|tsx|js|jsx|mjs|cjs)$/.test(f));
         targets.push(...rootFiles);
     }
@@ -34,7 +28,7 @@ function isNoFilesError(err) {
     const msg = err instanceof Error ? err.message : String(err);
     return msg.includes('No files matching') || msg.includes('All files matched by');
 }
-async function runLint(cwd, fix = false) {
+export async function runLint(cwd, fix = false) {
     const start = Date.now();
     const configFiles = [
         'eslint.config.js', 'eslint.config.ts', 'eslint.config.mjs',
@@ -42,7 +36,7 @@ async function runLint(cwd, fix = false) {
     ];
     let hasConfig = false;
     for (const f of configFiles) {
-        if (await fs_extra_1.default.pathExists(path_1.default.join(cwd, f))) {
+        if (await fs.pathExists(path.join(cwd, f))) {
             hasConfig = true;
             break;
         }
@@ -65,10 +59,10 @@ async function runLint(cwd, fix = false) {
         };
     }
     try {
-        const eslint = new eslint_1.ESLint({ cwd, fix });
+        const eslint = new ESLint({ cwd, fix });
         const results = await eslint.lintFiles(targets);
         if (fix)
-            await eslint_1.ESLint.outputFixes(results);
+            await ESLint.outputFixes(results);
         const errorCount = results.reduce((sum, r) => sum + r.errorCount, 0);
         const warningCount = results.reduce((sum, r) => sum + r.warningCount, 0);
         const formatter = await eslint.loadFormatter('stylish');

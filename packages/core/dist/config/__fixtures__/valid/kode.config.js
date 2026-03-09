@@ -1,4 +1,3 @@
-"use strict";
 module.exports = {
     project: {
         name: 'fixture-app',
@@ -9,4 +8,5 @@ module.exports = {
         test: true,
     },
 };
+export {};
 //# sourceMappingURL=kode.config.js.map

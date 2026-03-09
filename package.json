@@ -29,7 +29,8 @@
     "version:major": "node scripts/version-sync.js major",
     "link:global": "npm run build && cd packages/cli && npm link",
     "unlink:global": "npm unlink -g @kode-tools/cli",
-    "publish:cli": "npm run build && npm publish --workspace packages/cli --access public",
+    "publish:core": "npm run build:core && npm publish --workspace packages/core --access public",
+    "publish:cli": "npm run publish:core && npm publish --workspace packages/cli --access public",
     "prerelease": "npm run build && npm run test"
   },
   "engines": {
@@ -38,5 +39,8 @@
   "devDependencies": {
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.56.1"
+  },
+  "dependencies": {
+    "@kode-tools/cli": "^1.0.6"
   }
 }

@@ -7,7 +7,7 @@
 **The AI-powered developer productivity suite.**  
 Scaffold projects, write smarter commits, enforce quality, deploy to staging and production — all from your terminal.
 
-[![npm version](https://img.shields.io/npm/v/@kode/cli?color=000&style=flat-square)](https://www.npmjs.com/package/@kode/cli)
+[![npm version](https://img.shields.io/npm/v/@kode-tools/cli?color=000&style=flat-square)](https://www.npmjs.com/package/@kode-tools/cli)
 [![License: MIT](https://img.shields.io/badge/license-MIT-000?style=flat-square)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-000?style=flat-square)](https://nodejs.org)
 [![Built with Claude](https://img.shields.io/badge/AI-Claude%20API-000?style=flat-square)](https://anthropic.com)
@@ -66,13 +66,12 @@ kode doctor             # verify your whole setup in one command
 ### Install globally
 
 ```bash
-npm install -g @kode/cli
+npm install -g @kode-tools/cli
 ```
 
 ### One-time setup
 
 ```bash
-here is the apikey for testing: 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
 # 1. Store your API key — never type export again
 kode config set ANTHROPIC_API_KEY sk-ant-your-key-here
 
@@ -245,7 +244,7 @@ kode deploy --prod        # deploy to production
 Only `project.name` is required:
 
 ```js
-/** @type {import('@kode/core').DeployConfig} */
+/** @type {import('@kode-tools/core').DeployConfig} */
 module.exports = {
 
   project: {
@@ -387,7 +386,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci && npm install -g @kode/cli
+      - run: npm ci && npm install -g @kode-tools/cli
       - run: kode deploy --staging
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -398,7 +397,7 @@ jobs:
     needs: deploy-staging
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci && npm install -g @kode/cli
+      - run: npm ci && npm install -g @kode-tools/cli
       - run: kode deploy --prod
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -493,7 +492,7 @@ Install from the [VS Code Marketplace](https://marketplace.visualstudio.com) —
 ```
 kode/                              github.com/kode-cli/kode
 ├── packages/
-│   ├── core/                      @kode/core — shared engine
+│   ├── core/                      @kode-tools/core — shared engine
 │   │   └── src/
 │   │       ├── ai/                Claude API client, LRU cache, retry
 │   │       ├── config/            Config loading and Zod validation
@@ -512,7 +511,7 @@ kode/                              github.com/kode-cli/kode
 │   │       ├── quality/           Lint, test, security runners
 │   │       └── templates/         EJS project scaffolding engine
 │   │
-│   ├── cli/                       @kode/cli — the global command
+│   ├── cli/                       @kode-tools/cli — the global command
 │   │   ├── bin/run.js             Entry: Node check + config injection
 │   │   └── src/commands/          One file per command
 │   │
@@ -530,7 +529,7 @@ kode/                              github.com/kode-cli/kode
     └── version-sync.js            Bump version across all packages
 ```
 
-The core design principle: **one shared engine**. The CLI, VS Code extension, and deployment pipeline all import from `@kode/core`. Business logic lives in exactly one place.
+The core design principle: **one shared engine**. The CLI, VS Code extension, and deployment pipeline all import from `@kode-tools/core`. Business logic lives in exactly one place.
 
 ---
 
@@ -575,7 +574,7 @@ npm run version:minor    # 0.1.0 → 0.2.0
 npm run version:major    # 0.1.0 → 1.0.0
 
 npm run prerelease       # build + test
-npm run publish:cli      # publish @kode/cli to npm
+npm run publish:cli      # publishes @kode-tools/core first, then @kode-tools/cli
 
 git add -A
 git commit -m "chore: release v0.2.0"
@@ -615,7 +614,7 @@ git push && git push --tags
 
 - **Repository:** [github.com/kode-cli/kode](https://github.com/kode-cli/kode)
 - **Issues:** [github.com/kode-cli/kode/issues](https://github.com/kode-cli/kode/issues)
-- **npm:** [npmjs.com/package/@kode/cli](https://www.npmjs.com/package/@kode/cli)
+- **npm:** [npmjs.com/package/@kode-tools/cli](https://www.npmjs.com/package/@kode-tools/cli)
 - **Powered by:** Kode CLI
 
 ---

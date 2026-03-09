@@ -2,11 +2,22 @@
   "name": "@kode-tools/core",
   "version": "1.0.6",
   "description": "Shared Core Engine for Kode",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",

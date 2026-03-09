@@ -67,12 +67,12 @@ for (const pkgPath of PACKAGES) {
     const old = pkg.version;
     pkg.version = next;
 
-    // Also update internal @kode/* dependency versions
+    // Also update internal @kode-tools/* dependency versions
     for (const depField of ['dependencies', 'devDependencies', 'peerDependencies']) {
         if (!pkg[depField]) continue;
         for (const dep of Object.keys(pkg[depField])) {
-            if (dep.startsWith('@kode-tools/') && pkg[depField][dep] === '*') {
-                // Leave "*" as-is — monorepo workspace resolution handles it
+            if (dep.startsWith('@kode-tools/') && pkg[depField][dep] !== '*') {
+                pkg[depField][dep] = next;
             }
         }
     }

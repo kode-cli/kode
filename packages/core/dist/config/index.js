@@ -1,46 +1,41 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KodeConfigSchema = void 0;
-exports.defineConfig = defineConfig;
-exports.loadConfig = loadConfig;
-const zod_1 = require("zod");
-const cosmiconfig_1 = require("cosmiconfig");
-const cosmiconfig_typescript_loader_1 = require("cosmiconfig-typescript-loader");
+import { z } from 'zod';
+import { cosmiconfig } from 'cosmiconfig';
+import { TypeScriptLoader } from 'cosmiconfig-typescript-loader';
 // ── Schema ────────────────────────────────────────────────────────────────────
-const QualitySchema = zod_1.z.object({
-    lint: zod_1.z.boolean().default(true),
-    test: zod_1.z.boolean().default(true),
-    security: zod_1.z.boolean().default(false),
-    coverage: zod_1.z
+const QualitySchema = z.object({
+    lint: z.boolean().default(true),
+    test: z.boolean().default(true),
+    security: z.boolean().default(false),
+    coverage: z
         .object({
-        enabled: zod_1.z.boolean().default(false),
-        threshold: zod_1.z.number().min(0).max(100).default(80),
+        enabled: z.boolean().default(false),
+        threshold: z.number().min(0).max(100).default(80),
     })
         .default({}),
-    customChecks: zod_1.z
-        .array(zod_1.z.object({
-        name: zod_1.z.string(),
-        command: zod_1.z.string(),
+    customChecks: z
+        .array(z.object({
+        name: z.string(),
+        command: z.string(),
     }))
         .default([]),
 });
-const GitSchema = zod_1.z.object({
-    branchPattern: zod_1.z
+const GitSchema = z.object({
+    branchPattern: z
         .instanceof(RegExp)
         .default(/^(feature|fix|chore|docs|refactor|test)\/[a-z0-9-]+$/),
-    commitStyle: zod_1.z.enum(['conventional-commits', 'free-form']).default('conventional-commits'),
-    autoGenerateMessages: zod_1.z.boolean().default(true),
+    commitStyle: z.enum(['conventional-commits', 'free-form']).default('conventional-commits'),
+    autoGenerateMessages: z.boolean().default(true),
 });
-const IdeSchema = zod_1.z.object({
-    reviewOnSave: zod_1.z.boolean().default(true),
-    reviewSeverityThreshold: zod_1.z.enum(['error', 'warning', 'info']).default('warning'),
-    aiModel: zod_1.z.string().default('claude-sonnet-4-6'),
+const IdeSchema = z.object({
+    reviewOnSave: z.boolean().default(true),
+    reviewSeverityThreshold: z.enum(['error', 'warning', 'info']).default('warning'),
+    aiModel: z.string().default('claude-sonnet-4-6'),
 });
-const ProjectSchema = zod_1.z.object({
-    name: zod_1.z.string().min(1),
-    template: zod_1.z.string().min(1),
+const ProjectSchema = z.object({
+    name: z.string().min(1),
+    template: z.string().min(1),
 });
-exports.KodeConfigSchema = zod_1.z.object({
+export const KodeConfigSchema = z.object({
     project: ProjectSchema,
     git: GitSchema.default({}),
     quality: QualitySchema.default({}),
@@ -51,12 +46,12 @@ exports.KodeConfigSchema = zod_1.z.object({
  * Type-safe helper for kode.config.ts files.
  * Usage: export default defineConfig({ project: { name: 'my-app', template: 'node-express' } })
  */
-function defineConfig(config) {
-    return exports.KodeConfigSchema.parse(config);
+export function defineConfig(config) {
+    return KodeConfigSchema.parse(config);
 }
 // ── Loader ────────────────────────────────────────────────────────────────────
-async function loadConfig(cwd = process.cwd()) {
-    const explorer = (0, cosmiconfig_1.cosmiconfig)('kode', {
+export async function loadConfig(cwd = process.cwd()) {
+    const explorer = cosmiconfig('kode', {
         searchPlaces: [
             'kode.config.ts',
             'kode.config.js',
@@ -66,7 +61,7 @@ async function loadConfig(cwd = process.cwd()) {
             'package.json',
         ],
         loaders: {
-            '.ts': (0, cosmiconfig_typescript_loader_1.TypeScriptLoader)(),
+            '.ts': TypeScriptLoader(),
         },
     });
     let result = null;
@@ -75,7 +70,7 @@ async function loadConfig(cwd = process.cwd()) {
     }
     catch {
         // TS loader not available — retry without it (JS/JSON only)
-        const fallback = (0, cosmiconfig_1.cosmiconfig)('kode', {
+        const fallback = cosmiconfig('kode', {
             searchPlaces: [
                 'kode.config.js',
                 'kode.config.cjs',
@@ -91,10 +86,10 @@ async function loadConfig(cwd = process.cwd()) {
             `Run "kode setup" to create one, or create kode.config.ts manually.`);
     }
     try {
-        return exports.KodeConfigSchema.parse(result.config);
+        return KodeConfigSchema.parse(result.config);
     }
     catch (err) {
-        if (err instanceof zod_1.z.ZodError) {
+        if (err instanceof z.ZodError) {
             const messages = err.errors
                 .map((e) => `  • ${e.path.join('.')}: ${e.message}`)
                 .join('\n');

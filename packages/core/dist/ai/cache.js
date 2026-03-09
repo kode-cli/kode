@@ -1,11 +1,4 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.aiCache = void 0;
-exports.getCacheKey = getCacheKey;
-const crypto_1 = __importDefault(require("crypto"));
+import crypto from 'crypto';
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 const MAX_CACHE_SIZE = 100;
 class LRUCache {
@@ -44,9 +37,9 @@ class LRUCache {
         this.cache.clear();
     }
 }
-exports.aiCache = new LRUCache();
-function getCacheKey(prompt, model) {
-    return crypto_1.default
+export const aiCache = new LRUCache();
+export function getCacheKey(prompt, model) {
+    return crypto
         .createHash('sha256')
         .update(`${model}:${prompt}`)
         .digest('hex');

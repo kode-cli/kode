@@ -1,11 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.GitClient = void 0;
-exports.validateBranchName = validateBranchName;
-const simple_git_1 = require("simple-git");
-class GitClient {
+import { simpleGit } from 'simple-git';
+export class GitClient {
     constructor(cwd = process.cwd()) {
-        this.git = (0, simple_git_1.simpleGit)(cwd);
+        this.git = simpleGit(cwd);
     }
     async getStagedDiff() {
         return this.git.diff(['--cached']);
@@ -30,8 +26,7 @@ class GitClient {
         }
     }
 }
-exports.GitClient = GitClient;
-function validateBranchName(name, pattern) {
+export function validateBranchName(name, pattern) {
     return pattern.test(name);
 }
 //# sourceMappingURL=index.js.map

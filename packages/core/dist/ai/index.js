@@ -1,33 +1,25 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateCommitMessage = generateCommitMessage;
-exports.generatePRDescription = generatePRDescription;
-exports.isAIAvailable = isAIAvailable;
-const sdk_1 = __importDefault(require("@anthropic-ai/sdk"));
-const cache_js_1 = require("./cache.js");
-const retry_js_1 = require("./retry.js");
+import Anthropic from '@anthropic-ai/sdk';
+import { aiCache, getCacheKey } from './cache.js';
+import { withRetry } from './retry.js';
 const MODEL = 'claude-sonnet-4-6';
 function createClient() {
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey)
         return null;
-    return new sdk_1.default({ apiKey });
+    return new Anthropic({ apiKey });
 }
 // ── Commit Message ────────────────────────────────────────────────────────────
-async function generateCommitMessage(diff) {
+export async function generateCommitMessage(diff) {
     const client = createClient();
     if (!client) {
         throw new Error('ANTHROPIC_API_KEY is not set.\n' +
             'Run: export ANTHROPIC_API_KEY=your-key-here');
     }
-    const cacheKey = (0, cache_js_1.getCacheKey)(diff, MODEL);
-    const cached = cache_js_1.aiCache.get(cacheKey);
+    const cacheKey = getCacheKey(diff, MODEL);
+    const cached = aiCache.get(cacheKey);
     if (cached)
         return cached;
-    const result = await (0, retry_js_1.withRetry)(async () => {
+    const result = await withRetry(async () => {
         const response = await client.messages.create({
             model: MODEL,
             max_tokens: 256,
@@ -58,22 +50,22 @@ Rules:
             console.warn(`Commit message generation attempt ${attempt} failed: ${err.message}. Retrying…`);
         },
     });
-    cache_js_1.aiCache.set(cacheKey, result);
+    aiCache.set(cacheKey, result);
     return result;
 }
 // ── PR Description ────────────────────────────────────────────────────────────
-async function generatePRDescription(commits) {
+export async function generatePRDescription(commits) {
     const client = createClient();
     if (!client) {
         throw new Error('ANTHROPIC_API_KEY is not set.\n' +
             'Run: export ANTHROPIC_API_KEY=your-key-here');
     }
     const commitList = commits.join('\n');
-    const cacheKey = (0, cache_js_1.getCacheKey)(commitList, MODEL);
-    const cached = cache_js_1.aiCache.get(cacheKey);
+    const cacheKey = getCacheKey(commitList, MODEL);
+    const cached = aiCache.get(cacheKey);
     if (cached)
         return cached;
-    const result = await (0, retry_js_1.withRetry)(async () => {
+    const result = await withRetry(async () => {
         const response = await client.messages.create({
             model: MODEL,
             max_tokens: 1024,
@@ -109,11 +101,11 @@ Be concise and factual. Do not add any preamble or closing remarks.`,
             console.warn(`PR description generation attempt ${attempt} failed: ${err.message}. Retrying…`);
         },
     });
-    cache_js_1.aiCache.set(cacheKey, result);
+    aiCache.set(cacheKey, result);
     return result;
 }
 // ── Offline check ─────────────────────────────────────────────────────────────
-function isAIAvailable() {
+export function isAIAvailable() {
     return !!process.env.ANTHROPIC_API_KEY;
 }
 //# sourceMappingURL=index.js.map

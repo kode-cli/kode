@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.printReport = printReport;
-function printReport(results) {
+export function printReport(results) {
     console.log('\n── Quality Gate Results ─────────────────────');
     for (const r of results) {
         const icon = r.passed ? '✅' : '❌';
