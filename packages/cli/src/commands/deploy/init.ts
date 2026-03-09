@@ -5,13 +5,15 @@ import path from 'path';
 import { DEFAULT_CONTAINER_PORTS, type ProjectType } from '@kode-tools/core';
 
 // Local labels used only for display / Dockerfile generation
-type LocalProjectType = 'nextjs' | 'react' | 'express' | 'node';
+type LocalProjectType = 'nextjs' | 'react' | 'vite' | 'express' | 'nest' | 'node';
 
 /** Map local detected type → canonical ProjectType used in config + port resolution */
 const LOCAL_TO_PROJECT_TYPE: Record<LocalProjectType, ProjectType> = {
     nextjs:  'next-app',
     react:   'react-app',
+    vite:    'vite-app',
     express: 'node-express',
+    nest:    'nest-app',
     node:    'generic',
 };
 
@@ -61,13 +63,56 @@ export default class DeployInit extends Command {
         const defaultContainerPort = DEFAULT_CONTAINER_PORTS[projectType];
 
         const typeLabel: Record<LocalProjectType, string> = {
-            nextjs: 'Next.js',
-            react: 'React (static)',
+            nextjs:  'Next.js',
+            react:   'React (static)',
+            vite:    'Vite app',
             express: 'Node / Express',
-            node: 'Generic Node.js',
+            nest:    'NestJS',
+            node:    'Generic Node.js',
         };
         this.log(`   Detected project type: ${typeLabel[localProjectType]}`);
 
+        // ── Container registry ────────────────────────────────────────────────
+        this.log('');
+        const useRegistry = await confirm({
+            message: 'Push Docker image to a container registry? (Docker Hub, GHCR, etc.)',
+            default: false,
+        });
+
+        let registry = '';
+        if (useRegistry) {
+            const registryChoice = await select({
+                message: 'Choose registry:',
+                choices: [
+                    { name: 'Docker Hub  (docker.io/username)', value: 'dockerhub' },
+                    { name: 'GitHub Container Registry  (ghcr.io/username)', value: 'ghcr' },
+                    { name: 'Custom registry URL', value: 'custom' },
+                ],
+            });
+
+            if (registryChoice === 'dockerhub') {
+                const username = await input({
+                    message: 'Docker Hub username:',
+                    validate: (v) => v.trim().length > 0 ? true : 'Username is required',
+                });
+                registry = `docker.io/${username.trim()}`;
+            } else if (registryChoice === 'ghcr') {
+                const username = await input({
+                    message: 'GitHub username or org:',
+                    validate: (v) => v.trim().length > 0 ? true : 'Username is required',
+                });
+                registry = `ghcr.io/${username.trim()}`;
+            } else {
+                registry = await input({
+                    message: 'Registry URL (e.g. registry.example.com/myorg):',
+                    validate: (v) => v.trim().length > 0 ? true : 'Registry URL is required',
+                });
+                registry = registry.trim();
+            }
+            this.log(`   Registry: ${registry}/${appName}`);
+        }
+
+        // ── Staging / Production ──────────────────────────────────────────────
         const useStaging = await confirm({
             message: 'Configure staging environment (Docker Desktop)?',
             default: true,
@@ -124,6 +169,7 @@ export default class DeployInit extends Command {
         const config = this.generateConfig({
             appName,
             projectType,
+            registry,
             useStaging,
             stagingPort: parseInt(stagingPort),
             useProduction,
@@ -153,7 +199,17 @@ export default class DeployInit extends Command {
             if (generateDockerfile) {
                 const dockerfile = this.generateDockerfile(localProjectType, appName, defaultContainerPort);
                 await fs.writeFile(dockerfilePath, dockerfile, 'utf-8');
-                this.log(`✅ Created: Dockerfile\n`);
+                this.log(`✅ Created: Dockerfile`);
+
+                // ── .dockerignore ─────────────────────────────────────────────
+                const dockerignorePath = path.join(cwd, '.dockerignore');
+                if (!(await fs.pathExists(dockerignorePath))) {
+                    const dockerignore = this.generateDockerignore(localProjectType);
+                    await fs.writeFile(dockerignorePath, dockerignore, 'utf-8');
+                    this.log(`✅ Created: .dockerignore\n`);
+                } else {
+                    this.log(`   .dockerignore already exists — skipping.\n`);
+                }
             } else {
                 this.log('⚠️  Skipped Dockerfile generation. Remember to create one before deploying.\n');
             }
@@ -162,12 +218,15 @@ export default class DeployInit extends Command {
         }
 
         this.log('   Next steps:\n');
+        if (useRegistry) {
+            this.log(`   1. Log in to your registry: docker login`);
+        }
         if (useProduction) {
-            this.log(`   1. Set PROD_SERVER_IP in your environment`);
-            this.log(`   2. Ensure SSH access: ssh ${prodUser}@${prodHost}`);
-            this.log(`   3. Run: kode deploy --dry-run`);
+            this.log(`   ${useRegistry ? '2' : '1'}. Set PROD_SERVER_IP in your environment`);
+            this.log(`   ${useRegistry ? '3' : '2'}. Ensure SSH access: ssh ${prodUser}@${prodHost}`);
+            this.log(`   ${useRegistry ? '4' : '3'}. Run: kode deploy --dry-run`);
         } else {
-            this.log(`   1. Run: kode deploy --staging`);
+            this.log(`   ${useRegistry ? '2' : '1'}. Run: kode deploy --staging`);
         }
         this.log('');
     }
@@ -175,6 +234,7 @@ export default class DeployInit extends Command {
     private generateConfig(opts: {
         appName: string;
         projectType: ProjectType;
+        registry: string;
         useStaging: boolean;
         stagingPort: number;
         useProduction: boolean;
@@ -194,13 +254,22 @@ export default class DeployInit extends Command {
             `    name: '${opts.appName}',`,
             `    type: '${opts.projectType}',`,
             `    // version: '1.0.0',        // default: reads from package.json`,
-            `    // registry: 'ghcr.io/myorg', // default: Docker Hub`,
+        ];
+
+        if (opts.registry) {
+            lines.push(`    registry: '${opts.registry}', // image will be tagged as ${opts.registry}/${opts.appName}:<version>`);
+        } else {
+            lines.push(`    // registry: 'docker.io/myuser', // uncomment to push to Docker Hub`);
+            lines.push(`    // registry: 'ghcr.io/myorg',   // or to GitHub Container Registry`);
+        }
+
+        lines.push(
             `    dockerfile: './Dockerfile',`,
             `    buildContext: '.',`,
             `  },`,
             ``,
             `  environments: {`,
-        ];
+        );
 
         if (opts.useStaging) {
             lines.push(
@@ -318,6 +387,8 @@ export default class DeployInit extends Command {
                 ...pkg.devDependencies,
             };
             if (deps['next']) return 'nextjs';
+            if (deps['@nestjs/core'] || deps['@nestjs/common']) return 'nest';
+            if (deps['vite'] && !deps['react']) return 'vite';
             if (deps['react']) return 'react';
             if (deps['express'] || deps['fastify'] || deps['koa'] || deps['hapi']) return 'express';
         }
@@ -329,85 +400,212 @@ export default class DeployInit extends Command {
             case 'nextjs':
                 return [
                     `# syntax=docker/dockerfile:1`,
-                    `FROM node:20-alpine AS base`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
+                    `# Next.js — multi-stage build (standalone output)`,
+                    `# Prerequisites: add { output: 'standalone' } to next.config.js`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
                     ``,
-                    `# ── deps ─────────────────────────────────────────────────────────────────────`,
-                    `FROM base AS deps`,
+                    `FROM node:20-alpine AS base`,
                     `RUN apk add --no-cache libc6-compat`,
+                    ``,
+                    `# ── Stage 1: install deps ─────────────────────────────────────────────────────`,
+                    `FROM base AS deps`,
                     `WORKDIR /app`,
                     `COPY package*.json ./`,
                     `RUN npm ci`,
                     ``,
-                    `# ── builder ──────────────────────────────────────────────────────────────────`,
+                    `# ── Stage 2: build ───────────────────────────────────────────────────────────`,
                     `FROM base AS builder`,
                     `WORKDIR /app`,
                     `COPY --from=deps /app/node_modules ./node_modules`,
                     `COPY . .`,
+                    `ENV NEXT_TELEMETRY_DISABLED=1`,
                     `RUN npm run build`,
                     ``,
-                    `# ── runner ───────────────────────────────────────────────────────────────────`,
+                    `# ── Stage 3: production runner ───────────────────────────────────────────────`,
                     `FROM base AS runner`,
                     `WORKDIR /app`,
                     `ENV NODE_ENV=production`,
-                    `RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs`,
+                    `ENV NEXT_TELEMETRY_DISABLED=1`,
+                    ``,
+                    `RUN addgroup --system --gid 1001 nodejs`,
+                    `RUN adduser  --system --uid 1001 nextjs`,
+                    ``,
                     `COPY --from=builder /app/public ./public`,
                     `COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./`,
                     `COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static`,
+                    ``,
                     `USER nextjs`,
+                    ``,
                     `EXPOSE ${port}`,
                     `ENV PORT=${port}`,
+                    `ENV HOSTNAME="0.0.0.0"`,
+                    ``,
+                    `HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \\`,
+                    `    CMD wget -qO- http://localhost:${port}/api/health || exit 1`,
+                    ``,
                     `CMD ["node", "server.js"]`,
                 ].join('\n');
 
             case 'react':
                 return [
                     `# syntax=docker/dockerfile:1`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
+                    `# React (Create React App / CRA) — build then serve with Nginx`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
                     ``,
-                    `# ── build stage ──────────────────────────────────────────────────────────────`,
-                    `FROM node:18-alpine AS build`,
-                    ``,
+                    `# ── Stage 1: build ───────────────────────────────────────────────────────────`,
+                    `FROM node:20-alpine AS build`,
                     `WORKDIR /app`,
                     ``,
                     `COPY package*.json ./`,
-                    `RUN npm install`,
+                    `RUN npm ci`,
                     ``,
                     `COPY . .`,
                     `RUN npm run build`,
                     ``,
-                    `# ── production stage ─────────────────────────────────────────────────────────`,
-                    `FROM nginx:alpine`,
+                    `# ── Stage 2: serve with Nginx ────────────────────────────────────────────────`,
+                    `FROM nginx:1.27-alpine AS runner`,
                     ``,
-                    `COPY --from=build /app/dist /usr/share/nginx/html`,
+                    `# Remove default Nginx config and copy our own`,
+                    `RUN rm /etc/nginx/conf.d/default.conf`,
+                    `COPY --from=build /app/build /usr/share/nginx/html`,
+                    ``,
+                    `# Simple SPA config with gzip`,
+                    `RUN printf 'server {\\n\\`,
+                    `    listen 80;\\n\\`,
+                    `    root /usr/share/nginx/html;\\n\\`,
+                    `    gzip on;\\n\\`,
+                    `    location / { try_files $uri /index.html; }\\n\\`,
+                    `}\\n' > /etc/nginx/conf.d/app.conf`,
                     ``,
                     `EXPOSE 80`,
                     ``,
+                    `HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \\`,
+                    `    CMD wget -qO- http://localhost:80/ || exit 1`,
+                    ``,
                     `CMD ["nginx", "-g", "daemon off;"]`,
+                ].join('\n');
+
+            case 'vite':
+                return [
+                    `# syntax=docker/dockerfile:1`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
+                    `# Vite app — build then serve with Nginx`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
+                    ``,
+                    `# ── Stage 1: build ───────────────────────────────────────────────────────────`,
+                    `FROM node:20-alpine AS build`,
+                    `WORKDIR /app`,
+                    ``,
+                    `COPY package*.json ./`,
+                    `RUN npm ci`,
+                    ``,
+                    `COPY . .`,
+                    `RUN npm run build`,
+                    ``,
+                    `# ── Stage 2: serve with Nginx ────────────────────────────────────────────────`,
+                    `FROM nginx:1.27-alpine AS runner`,
+                    ``,
+                    `RUN rm /etc/nginx/conf.d/default.conf`,
+                    `COPY --from=build /app/dist /usr/share/nginx/html`,
+                    ``,
+                    `RUN printf 'server {\\n\\`,
+                    `    listen 80;\\n\\`,
+                    `    root /usr/share/nginx/html;\\n\\`,
+                    `    gzip on;\\n\\`,
+                    `    location / { try_files $uri /index.html; }\\n\\`,
+                    `}\\n' > /etc/nginx/conf.d/app.conf`,
+                    ``,
+                    `EXPOSE 80`,
+                    ``,
+                    `HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \\`,
+                    `    CMD wget -qO- http://localhost:80/ || exit 1`,
+                    ``,
+                    `CMD ["nginx", "-g", "daemon off;"]`,
+                ].join('\n');
+
+            case 'nest':
+                return [
+                    `# syntax=docker/dockerfile:1`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
+                    `# NestJS — multi-stage TypeScript build`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
+                    ``,
+                    `# ── Stage 1: build ───────────────────────────────────────────────────────────`,
+                    `FROM node:20-alpine AS build`,
+                    `WORKDIR /app`,
+                    ``,
+                    `COPY package*.json ./`,
+                    `RUN npm ci`,
+                    ``,
+                    `COPY . .`,
+                    `RUN npm run build`,
+                    ``,
+                    `# ── Stage 2: production image ────────────────────────────────────────────────`,
+                    `FROM node:20-alpine AS runner`,
+                    `WORKDIR /app`,
+                    ``,
+                    `ENV NODE_ENV=production`,
+                    ``,
+                    `# Install only production deps`,
+                    `COPY package*.json ./`,
+                    `RUN npm ci --omit=dev && npm cache clean --force`,
+                    ``,
+                    `COPY --from=build /app/dist ./dist`,
+                    ``,
+                    `# Non-root user`,
+                    `RUN addgroup -S appgroup && adduser -S appuser -G appgroup`,
+                    `USER appuser`,
+                    ``,
+                    `EXPOSE ${port}`,
+                    `ENV PORT=${port}`,
+                    ``,
+                    `HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \\`,
+                    `    CMD wget -qO- http://localhost:${port}/health || exit 1`,
+                    ``,
+                    `CMD ["node", "dist/main"]`,
                 ].join('\n');
 
             case 'express':
                 return [
                     `# syntax=docker/dockerfile:1`,
-                    `FROM node:20-alpine`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
+                    `# Node / Express — multi-stage build`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
                     ``,
+                    `# ── Stage 1: build ───────────────────────────────────────────────────────────`,
+                    `FROM node:20-alpine AS build`,
                     `WORKDIR /app`,
                     ``,
-                    `# Install dependencies`,
                     `COPY package*.json ./`,
-                    `RUN npm ci --omit=dev`,
+                    `RUN npm ci`,
                     ``,
-                    `# Copy source`,
                     `COPY . .`,
-                    ``,
-                    `# Build (if applicable)`,
+                    `# Build TypeScript if applicable`,
                     `RUN if [ -f "tsconfig.json" ]; then npm run build 2>/dev/null || true; fi`,
+                    ``,
+                    `# ── Stage 2: production image ────────────────────────────────────────────────`,
+                    `FROM node:20-alpine AS runner`,
+                    `WORKDIR /app`,
+                    ``,
+                    `ENV NODE_ENV=production`,
+                    ``,
+                    `# Install only production deps`,
+                    `COPY package*.json ./`,
+                    `RUN npm ci --omit=dev && npm cache clean --force`,
+                    ``,
+                    `COPY --from=build /app/dist ./dist`,
+                    ``,
+                    `# Non-root user`,
+                    `RUN addgroup -S appgroup && adduser -S appuser -G appgroup`,
+                    `USER appuser`,
                     ``,
                     `EXPOSE ${port}`,
                     `ENV PORT=${port}`,
-                    `ENV NODE_ENV=production`,
                     ``,
-                    `# Use a non-root user`,
-                    `RUN addgroup -S appgroup && adduser -S appuser -G appgroup`,
-                    `USER appuser`,
+                    `HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \\`,
+                    `    CMD wget -qO- http://localhost:${port}/health || exit 1`,
                     ``,
                     `CMD ["node", "dist/index.js"]`,
                 ].join('\n');
@@ -416,21 +614,85 @@ export default class DeployInit extends Command {
             default:
                 return [
                     `# syntax=docker/dockerfile:1`,
-                    `FROM node:20-alpine`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
+                    `# Generic Node.js`,
+                    `# ─────────────────────────────────────────────────────────────────────────────`,
                     ``,
+                    `FROM node:20-alpine AS runner`,
                     `WORKDIR /app`,
                     ``,
+                    `ENV NODE_ENV=production`,
+                    ``,
                     `COPY package*.json ./`,
-                    `RUN npm ci --omit=dev`,
+                    `RUN npm ci --omit=dev && npm cache clean --force`,
                     ``,
                     `COPY . .`,
                     ``,
+                    `# Non-root user`,
+                    `RUN addgroup -S appgroup && adduser -S appuser -G appgroup`,
+                    `USER appuser`,
+                    ``,
                     `EXPOSE ${port}`,
                     `ENV PORT=${port}`,
-                    `ENV NODE_ENV=production`,
+                    ``,
+                    `HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \\`,
+                    `    CMD wget -qO- http://localhost:${port}/ || exit 1`,
                     ``,
                     `CMD ["node", "index.js"]`,
                 ].join('\n');
         }
+    }
+
+    private generateDockerignore(type: LocalProjectType): string {
+        const base = [
+            `# ── Version control ──────────────────────────────────────────────────────────`,
+            `.git`,
+            `.gitignore`,
+            `.gitattributes`,
+            ``,
+            `# ── Node ─────────────────────────────────────────────────────────────────────`,
+            `node_modules`,
+            `npm-debug.log*`,
+            `yarn-debug.log*`,
+            `yarn-error.log*`,
+            ``,
+            `# ── Build output ─────────────────────────────────────────────────────────────`,
+            `dist`,
+            `build`,
+            `.next`,
+            `.nuxt`,
+            ``,
+            `# ── Environment / secrets ────────────────────────────────────────────────────`,
+            `.env`,
+            `.env.*`,
+            `!.env.example`,
+            ``,
+            `# ── Editor / OS ──────────────────────────────────────────────────────────────`,
+            `.DS_Store`,
+            `Thumbs.db`,
+            `.idea`,
+            `.vscode`,
+            `*.swp`,
+            ``,
+            `# ── Tests / CI ───────────────────────────────────────────────────────────────`,
+            `coverage`,
+            `.nyc_output`,
+            `*.test.ts`,
+            `*.spec.ts`,
+            `*.test.js`,
+            `*.spec.js`,
+        ];
+
+        if (type === 'nextjs') {
+            base.push(``, `# ── Next.js ──────────────────────────────────────────────────────────────────`, `.next`, `out`);
+        }
+
+        if (type === 'react' || type === 'vite') {
+            base.push(``, `# ── Storybook / docs ─────────────────────────────────────────────────────────`, `storybook-static`, `docs`);
+        }
+
+        base.push(``, `# ── Docker ───────────────────────────────────────────────────────────────────`, `Dockerfile*`, `.dockerignore`);
+
+        return base.join('\n') + '\n';
     }
 }

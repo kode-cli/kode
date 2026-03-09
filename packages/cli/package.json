@@ -40,8 +40,8 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "prepack": "npm run build && npx oclif manifest",
+    "build": "tsc -p tsconfig.json && npx oclif manifest",
+    "prepack": "npm run build",
     "postpack": "rm -f oclif.manifest.json",
     "lint": "eslint src --ext .ts",
     "clean": "rm -rf dist oclif.manifest.json",

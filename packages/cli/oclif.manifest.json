@@ -1,0 +1,775 @@
+{
+  "version": "1.0.3",
+  "commands": {
+    "add": {
+      "id": "add",
+      "description": "AI generates a new feature or component and adds it to your project",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode add auth",
+        "$ kode add \"user profile page\"",
+        "$ kode add middleware --dir src/middleware"
+      ],
+      "flags": {
+        "dir": {
+          "name": "dir",
+          "type": "option",
+          "char": "d",
+          "description": "Directory to write the generated file(s)",
+          "multiple": false,
+          "default": "src"
+        }
+      },
+      "args": {
+        "feature": {
+          "name": "feature",
+          "description": "Feature or component to add",
+          "required": false
+        }
+      }
+    },
+    "blame": {
+      "id": "blame",
+      "description": "AI explains who changed what in a file and why",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode blame src/index.ts",
+        "$ kode blame src/auth.ts"
+      ],
+      "flags": {},
+      "args": {
+        "file": {
+          "name": "file",
+          "description": "File to blame",
+          "required": true
+        }
+      }
+    },
+    "check": {
+      "id": "check",
+      "description": "Run the quality gate (lint, tests, security)",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode check",
+        "$ kode check --fix",
+        "$ kode check --only lint"
+      ],
+      "flags": {
+        "fix": {
+          "name": "fix",
+          "type": "boolean",
+          "description": "Auto-fix lint issues",
+          "allowNo": false
+        },
+        "only": {
+          "name": "only",
+          "type": "option",
+          "description": "Run only a specific check",
+          "multiple": false,
+          "options": [
+            "lint",
+            "test",
+            "security"
+          ]
+        }
+      },
+      "args": {}
+    },
+    "commit": {
+      "id": "commit",
+      "description": "Stage all changes, run quality checks, generate an AI commit message, and commit",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode commit",
+        "$ kode commit --push",
+        "$ kode commit -p",
+        "$ kode commit --no-add",
+        "$ kode commit --no-check"
+      ],
+      "flags": {
+        "push": {
+          "name": "push",
+          "type": "boolean",
+          "char": "p",
+          "description": "Push to remote after committing",
+          "allowNo": false
+        },
+        "no-add": {
+          "name": "no-add",
+          "type": "boolean",
+          "description": "Skip staging all changes (use already staged files only)",
+          "allowNo": false
+        },
+        "no-check": {
+          "name": "no-check",
+          "type": "boolean",
+          "description": "Skip quality checks before committing",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "completion": {
+      "id": "completion",
+      "description": "Install shell tab completions for Kode",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode completion install",
+        "$ kode completion install --zsh",
+        "$ kode completion install --bash",
+        "$ kode completion install --fish",
+        "$ kode completion uninstall"
+      ],
+      "flags": {
+        "zsh": {
+          "name": "zsh",
+          "type": "boolean",
+          "description": "Force zsh",
+          "allowNo": false
+        },
+        "bash": {
+          "name": "bash",
+          "type": "boolean",
+          "description": "Force bash",
+          "allowNo": false
+        },
+        "fish": {
+          "name": "fish",
+          "type": "boolean",
+          "description": "Force fish",
+          "allowNo": false
+        }
+      },
+      "args": {
+        "action": {
+          "name": "action",
+          "description": "install or uninstall completions",
+          "required": false,
+          "options": [
+            "install",
+            "uninstall"
+          ],
+          "default": "install"
+        }
+      }
+    },
+    "config": {
+      "id": "config",
+      "description": "Manage global Kode configuration (~/.kode/config.json)",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode config set ANTHROPIC_API_KEY sk-ant-...",
+        "$ kode config get ANTHROPIC_API_KEY",
+        "$ kode config list",
+        "$ kode config delete ANTHROPIC_API_KEY"
+      ],
+      "flags": {},
+      "args": {
+        "action": {
+          "name": "action",
+          "description": "Action: set, get, list, delete",
+          "required": true,
+          "options": [
+            "set",
+            "get",
+            "list",
+            "delete"
+          ]
+        },
+        "key": {
+          "name": "key",
+          "description": "Config key",
+          "required": false
+        },
+        "value": {
+          "name": "value",
+          "description": "Config value",
+          "required": false
+        }
+      }
+    },
+    "deploy": {
+      "id": "deploy",
+      "description": "Deploy your app to staging (Docker Desktop) or production (remote SSH)",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode deploy",
+        "$ kode deploy --staging",
+        "$ kode deploy --prod",
+        "$ kode deploy --dry-run",
+        "$ kode deploy --staging --no-check"
+      ],
+      "flags": {
+        "staging": {
+          "name": "staging",
+          "type": "boolean",
+          "description": "Deploy to staging environment",
+          "allowNo": false
+        },
+        "prod": {
+          "name": "prod",
+          "type": "boolean",
+          "description": "Deploy to production environment",
+          "allowNo": false
+        },
+        "dry-run": {
+          "name": "dry-run",
+          "type": "boolean",
+          "description": "Validate config and connections without deploying",
+          "allowNo": false
+        },
+        "no-check": {
+          "name": "no-check",
+          "type": "boolean",
+          "description": "Skip pre-deploy quality checks",
+          "allowNo": false
+        },
+        "no-hooks": {
+          "name": "no-hooks",
+          "type": "boolean",
+          "description": "Skip all hooks",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "diff": {
+      "id": "diff",
+      "description": "Show an AI explanation of your current changes",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode diff",
+        "$ kode diff --staged",
+        "$ kode diff --no-ai"
+      ],
+      "flags": {
+        "staged": {
+          "name": "staged",
+          "type": "boolean",
+          "char": "s",
+          "description": "Show only staged changes",
+          "allowNo": false
+        },
+        "no-ai": {
+          "name": "no-ai",
+          "type": "boolean",
+          "description": "Show raw diff without AI explanation",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "docs": {
+      "id": "docs",
+      "description": "Generate JSDoc/TSDoc comments for a file (manual stubs by default, AI-enhanced with --ai)",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode docs src/utils.ts",
+        "$ kode docs src/api.ts --write",
+        "$ kode docs src/api.ts --ai",
+        "$ kode docs src/api.ts --ai --write"
+      ],
+      "flags": {
+        "write": {
+          "name": "write",
+          "type": "boolean",
+          "char": "w",
+          "description": "Write the documented version back to the file",
+          "allowNo": false
+        },
+        "ai": {
+          "name": "ai",
+          "type": "boolean",
+          "description": "Use AI (Claude) to generate rich documentation (requires ANTHROPIC_API_KEY)",
+          "allowNo": false
+        }
+      },
+      "args": {
+        "file": {
+          "name": "file",
+          "description": "File to document",
+          "required": true
+        }
+      }
+    },
+    "doctor": {
+      "id": "doctor",
+      "description": "Check that Kode is set up correctly on this machine",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode doctor"
+      ],
+      "flags": {},
+      "args": {}
+    },
+    "history": {
+      "id": "history",
+      "description": "Show deployment history",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode history",
+        "$ kode history --env production",
+        "$ kode history --count 20"
+      ],
+      "flags": {
+        "env": {
+          "name": "env",
+          "type": "option",
+          "char": "e",
+          "description": "Filter by environment",
+          "multiple": false,
+          "options": [
+            "staging",
+            "production"
+          ]
+        },
+        "count": {
+          "name": "count",
+          "type": "option",
+          "char": "n",
+          "description": "Number of records to show",
+          "multiple": false,
+          "default": 10
+        }
+      },
+      "args": {}
+    },
+    "init": {
+      "id": "init",
+      "description": "Scaffold a new project from a template",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode init my-api",
+        "$ kode init my-api --template node-express",
+        "$ kode init my-app --template react-app --no-install"
+      ],
+      "flags": {
+        "template": {
+          "name": "template",
+          "type": "option",
+          "char": "t",
+          "description": "Template to scaffold from",
+          "multiple": false,
+          "options": [
+            "node-express",
+            "react-app"
+          ]
+        },
+        "no-install": {
+          "name": "no-install",
+          "type": "boolean",
+          "description": "Skip installing npm dependencies",
+          "allowNo": false
+        },
+        "no-git": {
+          "name": "no-git",
+          "type": "boolean",
+          "description": "Skip initializing a Git repository",
+          "allowNo": false
+        },
+        "no-github": {
+          "name": "no-github",
+          "type": "boolean",
+          "description": "Skip creating a GitHub repository",
+          "allowNo": false
+        }
+      },
+      "args": {
+        "projectName": {
+          "name": "projectName",
+          "description": "Name of the project to create",
+          "required": false
+        }
+      }
+    },
+    "log": {
+      "id": "log",
+      "description": "Show a beautiful AI-summarized git history",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode log",
+        "$ kode log --count 20",
+        "$ kode log --no-ai"
+      ],
+      "flags": {
+        "count": {
+          "name": "count",
+          "type": "option",
+          "char": "n",
+          "description": "Number of commits to show",
+          "multiple": false,
+          "default": 10
+        },
+        "no-ai": {
+          "name": "no-ai",
+          "type": "boolean",
+          "description": "Skip AI summary, show raw commit log only",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "open": {
+      "id": "open",
+      "description": "Open the GitHub repository in your browser",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode open",
+        "$ kode open --prs",
+        "$ kode open --issues",
+        "$ kode open --actions"
+      ],
+      "flags": {
+        "prs": {
+          "name": "prs",
+          "type": "boolean",
+          "description": "Open pull requests page",
+          "allowNo": false
+        },
+        "issues": {
+          "name": "issues",
+          "type": "boolean",
+          "description": "Open issues page",
+          "allowNo": false
+        },
+        "actions": {
+          "name": "actions",
+          "type": "boolean",
+          "description": "Open GitHub Actions page",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "pr": {
+      "id": "pr",
+      "description": "Generate a pull request description from recent commits (manual template by default, AI-enhanced with --ai)",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode pr",
+        "$ kode pr --commits 20",
+        "$ kode pr --ai",
+        "$ kode pr --ai --commits 20"
+      ],
+      "flags": {
+        "commits": {
+          "name": "commits",
+          "type": "option",
+          "char": "n",
+          "description": "Number of recent commits to include",
+          "multiple": false,
+          "default": 10
+        },
+        "ai": {
+          "name": "ai",
+          "type": "boolean",
+          "description": "Use AI (Claude) to generate the PR description (requires ANTHROPIC_API_KEY)",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "rename": {
+      "id": "rename",
+      "description": "Safely rename a function or variable across the whole project",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode rename getUserData getUser",
+        "$ kode rename OldClassName NewClassName"
+      ],
+      "flags": {},
+      "args": {
+        "from": {
+          "name": "from",
+          "description": "Current name to replace",
+          "required": true
+        },
+        "to": {
+          "name": "to",
+          "description": "New name",
+          "required": true
+        }
+      }
+    },
+    "rollback": {
+      "id": "rollback",
+      "description": "Roll back to a previous deployment",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode rollback",
+        "$ kode rollback --env production",
+        "$ kode rollback --version v1.2.3-a1b2c3d"
+      ],
+      "flags": {
+        "env": {
+          "name": "env",
+          "type": "option",
+          "char": "e",
+          "description": "Environment to roll back",
+          "multiple": false,
+          "options": [
+            "staging",
+            "production"
+          ]
+        },
+        "version": {
+          "name": "version",
+          "type": "option",
+          "char": "v",
+          "description": "Specific image tag to roll back to",
+          "multiple": false
+        }
+      },
+      "args": {}
+    },
+    "setup": {
+      "id": "setup",
+      "description": "Install Kode Git hooks and code style config into the current project",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode setup"
+      ],
+      "flags": {},
+      "args": {}
+    },
+    "stats": {
+      "id": "stats",
+      "description": "Show project stats — files, lines of code, commits, contributors",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode stats"
+      ],
+      "flags": {},
+      "args": {}
+    },
+    "status": {
+      "id": "status",
+      "description": "Beautiful overview of git status, branch, and recent commits",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode status"
+      ],
+      "flags": {},
+      "args": {}
+    },
+    "test-gen": {
+      "id": "test-gen",
+      "description": "Generate a Vitest test file (manual scaffold by default, AI-enhanced with --ai)",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode test src/utils.ts",
+        "$ kode test src/api.ts --write",
+        "$ kode test src/api.ts --ai",
+        "$ kode test src/api.ts --ai --write"
+      ],
+      "flags": {
+        "write": {
+          "name": "write",
+          "type": "boolean",
+          "char": "w",
+          "description": "Write the test file to disk",
+          "allowNo": false
+        },
+        "ai": {
+          "name": "ai",
+          "type": "boolean",
+          "description": "Use AI (Claude) to generate comprehensive tests (requires ANTHROPIC_API_KEY)",
+          "allowNo": false
+        }
+      },
+      "args": {
+        "file": {
+          "name": "file",
+          "description": "Source file to generate tests for",
+          "required": true
+        }
+      }
+    },
+    "undo": {
+      "id": "undo",
+      "description": "Safely revert the last commit (keeps your changes staged)",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode undo",
+        "$ kode undo --hard"
+      ],
+      "flags": {
+        "hard": {
+          "name": "hard",
+          "type": "boolean",
+          "description": "Discard changes entirely (cannot be undone)",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "whoami": {
+      "id": "whoami",
+      "description": "Show current git user, remote URL, and branch info",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode whoami"
+      ],
+      "flags": {},
+      "args": {}
+    },
+    "deploy:init": {
+      "id": "deploy:init",
+      "description": "Generate a kode.deploy.config.js file interactively",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode deploy:init"
+      ],
+      "flags": {},
+      "args": {}
+    },
+    "deploy:status": {
+      "id": "deploy:status",
+      "description": "Show the status of running containers in each environment",
+      "strict": true,
+      "pluginName": "@kode-tools/cli",
+      "pluginAlias": "@kode-tools/cli",
+      "pluginType": "core",
+      "aliases": [],
+      "hiddenAliases": [],
+      "examples": [
+        "$ kode deploy:status",
+        "$ kode deploy:status --env staging"
+      ],
+      "flags": {
+        "env": {
+          "name": "env",
+          "type": "option",
+          "char": "e",
+          "description": "Environment to check",
+          "multiple": false,
+          "options": [
+            "staging",
+            "production"
+          ]
+        }
+      },
+      "args": {}
+    }
+  }
+}
