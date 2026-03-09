@@ -1,6 +1,6 @@
 {
   "name": "@kode-tools/core",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Shared Core Engine for Kode",
   "type": "module",
   "main": "dist/index.js",
